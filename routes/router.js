@@ -16,4 +16,5 @@ router.get('/chat', controller.sendChatPage)
 
 router.get('/', controller.loginRedirect)
 
+router.get('*', controller.error404)
 module.exports = router

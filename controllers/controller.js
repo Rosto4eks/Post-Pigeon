@@ -13,11 +13,14 @@ exports.sendRegisterPage = (req, res) => {
 }
 
 exports.registration = (req, res) => {
+    // check if all fields are filled
     if (req.body.login && req.body.name && req.body.password) {
-        let newLogin = req.body.login
-        let newName = req.body.name
-        let newPassword = req.body.password
+        const newLogin = req.body.login
+        const newName = req.body.name
+        const newPassword = req.body.password
+        // user presence check
         if(LightDB.findUser(newLogin) === false) {
+            // if not add new user
             const newUser = new User(newLogin, newName, newPassword, "User")
             if (newUser.save() === true) {
                 res.cookie("login", newLogin)
@@ -71,9 +74,10 @@ exports.sendLoginPage = (req, res) => {
     });
 };
 exports.login = (req, res) => {
+    // check if all fields are filled
     if (req.body.login && req.body.password) {
-        let newLogin = req.body.login
-        let newPassword = req.body.password
+        const newLogin = req.body.login
+        const newPassword = req.body.password
         if(LightDB.findUser(newLogin) === false) {
             res.render('login', {
                 pageName: 'login',
@@ -85,6 +89,7 @@ exports.login = (req, res) => {
             })
         } 
         else {
+            // check passwords
             if (LightDB.checkPassword(newLogin, newPassword) === true) {
                 res.cookie("login", newLogin)
                 res.cookie("name", LightDB.getName(newLogin))
@@ -132,3 +137,7 @@ exports.loginRedirect = (req, res) => {
         res.redirect('/login')
     };
 };
+
+exports.error404 = (req, res) => {
+    res.render('404')
+}

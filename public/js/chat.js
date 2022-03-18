@@ -13,7 +13,6 @@ login = getCookie("login")
 
 form.addEventListener('submit', (e) => {
     e.preventDefault()
-
     if (input.value) {
         socket.emit('chat message', {login: login, name: Name + ':&nbsp', message: input.value})
         input.value = ''
