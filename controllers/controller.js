@@ -9,21 +9,20 @@ exports.sendRegisterPage = (req, res) => {
         buttonValue: 'зарегистрироваться',
         href: '/',
         back: 'вернуться',
-    });
-};
+    })
+}
 
 exports.registration = (req, res) => {
     if (req.body.login && req.body.name && req.body.password) {
-        let newLogin = req.body.login;
-        let newName = req.body.name;
-        let newPassword = req.body.password;
+        let newLogin = req.body.login
+        let newName = req.body.name
+        let newPassword = req.body.password
         if(LightDB.findUser(newLogin) === false) {
-            const newUser = new User(newLogin, newName, newPassword, "User");
+            const newUser = new User(newLogin, newName, newPassword, "User")
             if (newUser.save() === true) {
                 res.cookie("login", newLogin)
                 res.cookie("name", newName)
-                res.cookie("password", newPassword)
-                res.redirect('/chat');
+                res.redirect('/chat')
             }
             else {
                 res.render('login', {
@@ -34,7 +33,7 @@ exports.registration = (req, res) => {
                     buttonValue: 'зарегистрироваться',
                     href: '/',
                     back: 'вернуться',
-                }); 
+                })
             }
         } 
         else {
@@ -47,7 +46,7 @@ exports.registration = (req, res) => {
                 href: '/',
                 back: 'вернуться',
             });
-        }
+        };
     }
     else {
         res.render('login', {
@@ -59,7 +58,7 @@ exports.registration = (req, res) => {
             href: '/',
             back: 'вернуться',
         });
-    }
+    };
 };
 
 exports.sendLoginPage = (req, res) => {
@@ -73,8 +72,8 @@ exports.sendLoginPage = (req, res) => {
 };
 exports.login = (req, res) => {
     if (req.body.login && req.body.password) {
-        let newLogin = req.body.login;
-        let newPassword = req.body.password;
+        let newLogin = req.body.login
+        let newPassword = req.body.password
         if(LightDB.findUser(newLogin) === false) {
             res.render('login', {
                 pageName: 'login',
@@ -83,14 +82,13 @@ exports.login = (req, res) => {
                 buttonValue: 'войти',
                 href: '/register',
                 back: 'зарегистрироваться',
-            });
+            })
         } 
         else {
             if (LightDB.checkPassword(newLogin, newPassword) === true) {
                 res.cookie("login", newLogin)
                 res.cookie("name", LightDB.getName(newLogin))
-                res.cookie("password", newPassword)
-                res.redirect('/chat');
+                res.redirect('/chat')
             }
             else {
                 res.render('login', {
@@ -100,8 +98,8 @@ exports.login = (req, res) => {
                     buttonValue: 'войти',
                     href: '/register',
                     back: 'зарегистрироваться',
-                });
-            }    
+                })
+            } 
         }
     }
     else {
@@ -112,13 +110,18 @@ exports.login = (req, res) => {
             buttonValue: 'войти',
             href: '/register',
             back: 'зарегистрироваться',
-        });
+        })
     }
-};
+}
 
 
 exports.sendChatPage = (req, res) => {
-    res.render('chat');
+    if(req.cookies.login != null) {
+         res.render('chat')
+    }
+    else {
+        res.redirect('/login')
+    };
 };
 
 exports.loginRedirect = (req, res) => {
@@ -126,6 +129,6 @@ exports.loginRedirect = (req, res) => {
         res.redirect('/chat')
     }
     else {
-        res.redirect('/login');
-    }
+        res.redirect('/login')
+    };
 };

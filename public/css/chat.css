@@ -86,13 +86,30 @@ input {
     box-shadow: 0 15px 13px 0 #00000080;
     color: #272727;
     list-style-type: none;
-    border-radius: 5px 30px 50px 30px;
+    border-radius: 5px 30px 30px 30px;
+}
+.yourBlock {
+    min-width: 150px;
+    display: flex;
+    margin: 10px 10px 10px auto;
+    padding: 10px;
+    background-color: #e2e2e2;
+    box-shadow: 0 15px 13px 0 #00000080;
+    color: #272727;
+    list-style-type: none;
+    border-radius: 30px 5px 30px 30px;
 }
 .name {
     display:inline;
     font-weight: 700;
     font-style: italic;
     color: #228681;
+}
+.yourName {
+    display:inline;
+    font-weight: 700;
+    font-style: italic;
+    color: #c041d1; 
 }
 .message {
     word-break: break-word;

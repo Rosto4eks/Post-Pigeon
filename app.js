@@ -7,20 +7,20 @@ const express = require('express'),
     expressHbs = require('express-handlebars'),
     hbs = require('hbs')
 
-server.use(express.static(__dirname + '/public'));
-server.set('view engine', 'hbs');
+server.use(express.static(__dirname + '/public'))
+server.set('view engine', 'hbs')
 server.use(cookieParser('Rosto4eks Limited'))
-server.use('/', router);
+server.use('/', router)
 
 // connecting socket to chat
 io.on('connection', (socket) => {
     socket.on('chat message', (data) => {
-        io.emit('chat message', {name: data.name, message: data.message});
-    });
-});
+        io.emit('chat message', {login: data.login, name: data.name, message: data.message});
+    })
+})
 
 const PORT = 1337;
 
 http.listen(PORT, () => {
     console.log(`\nlocal adress:   localhost:${PORT}\nnetwork adress: 192.168.100.6:${PORT}`);
-});
+})

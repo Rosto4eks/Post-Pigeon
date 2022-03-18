@@ -1,6 +1,6 @@
 [
   {
-    "nextID": 2
+    "nextID": 3
   },
   {
     "Admin": {
@@ -13,6 +13,12 @@
       "id": 1,
       "name": "Ростислав",
       "password": "qwerty123",
+      "role": "User"
+    },
+    "AsusUser": {
+      "id": 2,
+      "name": "Rostislav)",
+      "password": "12345",
       "role": "User"
     }
   }
