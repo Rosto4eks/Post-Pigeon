@@ -23,8 +23,8 @@ exports.registration = (req, res) => {
             // if not add new user
             const newUser = new User(newLogin, newName, newPassword, "User")
             if (newUser.save() === true) {
-                res.cookie("login", newLogin)
-                res.cookie("name", newName)
+                res.cookie("login", newLogin, {'maxAge': 5000000000})
+                res.cookie("name", newName, {'maxAge': 5000000000})
                 res.redirect('/chat')
             }
             else {
@@ -91,8 +91,8 @@ exports.login = (req, res) => {
         else {
             // check passwords
             if (LightDB.checkPassword(newLogin, newPassword) === true) {
-                res.cookie("login", newLogin)
-                res.cookie("name", LightDB.getName(newLogin))
+                res.cookie("login", newLogin, {'maxAge': 5000000000})
+                res.cookie("name", LightDB.getName(newLogin), {'maxAge': 5000000000})
                 res.redirect('/chat')
             }
             else {

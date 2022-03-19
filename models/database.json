@@ -1,24 +1,18 @@
 [
   {
-    "nextID": 3
+    "nextID": 2
   },
   {
     "Admin": {
       "id": 0,
       "name": "Rosto4eks",
-      "password": "tupac",
+      "password": "O0nAxco",
       "role": "Admin"
     },
-    "Rostik": {
+    "Rosto4eks": {
       "id": 1,
-      "name": "Ростислав",
-      "password": "qwerty123",
-      "role": "User"
-    },
-    "AsusUser": {
-      "id": 2,
-      "name": "Rostislav)",
-      "password": "12345",
+      "name": "Rostislav4ik",
+      "password": "N3WacDOZRgJVQ",
       "role": "User"
     }
   }
