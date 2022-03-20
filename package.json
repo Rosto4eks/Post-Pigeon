@@ -1,6 +1,6 @@
 {
-  "name": "post-pigeon",
-  "version": "1.3.0",
+  "name": "starling",
+  "version": "1.4.0",
   "main": "app.js",
   "scripts": {
     "dev": "nodemon app.js",
