@@ -6,36 +6,58 @@ exports.sendRegisterPage = (req, res) => {
         pageName: 'Register',
         action: 'register',
         name: true,
+        repeat: true,
         buttonValue: 'зарегистрироваться',
-        href: '/',
-        back: 'вернуться',
+        href1: '/',
+        href2: '/login',
+        button1: 'на главную',
+        button2: 'войти',
     })
 }
 
 exports.registration = (req, res) => {
     // check if all fields are filled
-    if (req.body.login && req.body.name && req.body.password) {
+    if (req.body.login && req.body.name && req.body.password && req.body.repeat) {
         const newLogin = req.body.login
         const newName = req.body.name
         const newPassword = req.body.password
         // user presence check
         if(LightDB.findUser(newLogin) === false) {
             // if not add new user
-            const newUser = new User(newLogin, newName, newPassword, "User")
-            if (newUser.save() === true) {
-                res.cookie("login", newLogin, {'maxAge': 5000000000})
-                res.cookie("name", newName, {'maxAge': 5000000000})
-                res.redirect('/chat')
+            if (req.body.password === req.body.repeat) {
+                    const newUser = new User(newLogin, newName, newPassword, "User")
+                if (newUser.save() === true) {
+                    res.cookie("login", newLogin, {'maxAge': 5000000000})
+                    res.cookie("name", newName, {'maxAge': 5000000000})
+                    res.redirect('/chat')
+                }
+                else {
+                    res.render('login', {
+                        pagename: 'Register',
+                        action: 'register',
+                        name: true,
+                        repeat: true,
+                        errorMessage: 'ошибка регистрации',
+                        buttonValue: 'зарегистрироваться',
+                        href1: '/',
+                        href2: '/login',
+                        button1: 'на главную',
+                        button2: 'войти',
+                    })
+                }
             }
             else {
                 res.render('login', {
                     pagename: 'Register',
                     action: 'register',
                     name: true,
-                    errorMessage: 'ошибка регистрации',
+                    repeat: true,
+                    errorMessage: 'пароли не совпадают',
                     buttonValue: 'зарегистрироваться',
-                    href: '/',
-                    back: 'вернуться',
+                    href1: '/',
+                    href2: '/login',
+                    button1: 'на главную',
+                    button2: 'войти',
                 })
             }
         } 
@@ -44,10 +66,13 @@ exports.registration = (req, res) => {
                 pagename: 'Register',
                 action: 'register',
                 name: true,
+                repeat: true,
                 errorMessage: 'этот логин занят',
                 buttonValue: 'зарегистрироваться',
-                href: '/',
-                back: 'вернуться',
+                href1: '/',
+                href2: '/login',
+                button1: 'на главную',
+                button2: 'войти',
             });
         };
     }
@@ -56,10 +81,13 @@ exports.registration = (req, res) => {
             pagename: 'Register',
             action: 'register',
             name: true,
+            repeat: true,
             errorMessage: 'не все поля заполнены',
             buttonValue: 'зарегистрироваться',
-            href: '/',
-            back: 'вернуться',
+            href1: '/',
+            href2: '/login',
+            button1: 'на главную',
+            button2: 'войти',
         });
     };
 };
@@ -69,8 +97,10 @@ exports.sendLoginPage = (req, res) => {
         pageName: 'login',
         action: 'login',
         buttonValue: 'войти',
-        href: '/register',
-        back: 'зарегистрироваться',
+        href1: '/',
+        href2: '/register',
+        button1: 'на главную',
+        button2: 'зарегистрироваться',
     });
 };
 exports.login = (req, res) => {
@@ -84,8 +114,10 @@ exports.login = (req, res) => {
                 action: 'login',
                 errorMessage: 'пользователь не найден',
                 buttonValue: 'войти',
-                href: '/register',
-                back: 'зарегистрироваться',
+                href1: '/',
+                href2: '/register',
+                button1: 'на главную',
+                button2: 'зарегистрироваться',
             })
         } 
         else {
@@ -101,8 +133,10 @@ exports.login = (req, res) => {
                     action: 'login',
                     errorMessage: 'неверный пароль',
                     buttonValue: 'войти',
-                    href: '/register',
-                    back: 'зарегистрироваться',
+                    href1: '/',
+                    href2: '/register',
+                    button1: 'на главную',
+                    button2: 'зарегистрироваться',
                 })
             } 
         }
@@ -113,8 +147,10 @@ exports.login = (req, res) => {
             action: 'login',
             errorMessage: 'не все поля заполнены',
             buttonValue: 'войти',
-            href: '/register',
-            back: 'зарегистрироваться',
+            href1: '/',
+            href2: '/register',
+            button1: 'на главную',
+            button2: 'зарегистрироваться',
         })
     }
 }

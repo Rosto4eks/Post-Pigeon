@@ -23,7 +23,7 @@ input {
 .header__image {
     display: flex;
     width: 10%;
-    margin: 5% auto 0 auto;
+    margin: 2% auto 0 auto;
 }
 .container {
     display: flex;
@@ -117,14 +117,19 @@ input {
     background-color:#ffffff;
     transition: 200ms;
 }
-.register {
-    text-align: center;
-    text-decoration: none;
+.buttons {
+    display: flex;
+    justify-content: space-between;
     font-family: 'Mulish', sans-serif;
     font-weight: 800;
     font-size: 18px;
+    margin: 5% 20% 0 20%;
+}
+.button {
+    width: 48%;
+    text-align: center;
+    text-decoration: none;
     border: none;
-    margin: 10% 20% 0 20%;
     border-radius: 20px;
     padding: 8px 0 8px 0;
     background-color: #f1f1f1;
@@ -147,7 +152,7 @@ input {
     .login__form {
         margin: 10px 10% 0 10%;
     }
-    .register {
-        margin: 20% 10% 0 10%;
+    .buttons {
+        margin: 5% 10% 0 10%;
     }
 }
