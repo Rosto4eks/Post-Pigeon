@@ -4,6 +4,8 @@ const urlencodedParser = express.urlencoded({extended: false})
 const controller = require('../controllers/controller')
 const router = express.Router()
 
+router.get('/about', controller.sendAboutPage)
+
 router.get('/register', controller.sendRegisterPage)
 
 router.post('/register', urlencodedParser, controller.registration)
@@ -14,7 +16,9 @@ router.post('/login', urlencodedParser, controller.login)
 
 router.get('/chat', controller.sendChatPage)
 
-router.get('/', controller.loginRedirect)
+router.get('/admin', controller.sendAdminPage)
+
+router.get('/', controller.chatRedirect)
 
 router.get('*', controller.error404)
 module.exports = router

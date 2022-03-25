@@ -1,0 +1,126 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #bff3bf;
+}
+
+.header {
+    text-align: center;
+    font-family: 'Mulish', sans-serif;
+    font-size: 60px;
+    letter-spacing: 2px;
+    font-weight: 800;
+    background-color: #bff3bf;
+    border-radius: 0 0 20% 20%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.header__name {
+    background-color: #ffffff;
+    border-radius: 0 0 30% 50%;
+    color:#8bcf89;
+    width: 100%;
+    margin: 0 auto;
+    padding-bottom: 2%;
+}
+.header_logo {
+    width: 10%;
+    margin: 2% auto 2% ;
+}
+
+.about {
+    background-color: #bff3bf;
+    display: flex;
+    width: 100%;
+    font-family: 'Mulish', sans-serif;
+    font-size: 25px;
+    font-weight: 600;
+}
+.about__text {
+    background-color: #ffffff;
+    box-shadow: 0 5px 20px 0 #00000080;
+    padding: 0 20px 40px 20px;
+    font-size: 30px;
+    font-weight: 700;
+    color:#5a5a5a;
+    border-radius: 30px;
+    width: 60%;
+    margin: 2% auto 2%;
+}
+.center {
+    font-size: 40px;
+    text-align: center;
+}
+.redirect {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    color:#e7e7e7;
+    background-color: #474747;
+    font-family: 'Mulish', sans-serif;
+    font-size: 25px;
+    font-weight: 700;
+}
+.login {
+    border-radius: 30px;
+    padding: 10px 0 10px;
+    margin: 2% 0 2%;
+    width: 30%;
+    background-color: #8bcf89;
+}
+.register {
+    border-radius: 30px;
+    padding: 10px 0 10px;
+    margin: 2% 0 2%;
+    width: 30%;
+    background-color: #8bcf89;
+}
+
+
+.footer {
+    font-family: 'Mulish', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    width: 100%;
+    background-color:#2a2a2a;
+    color: #d8d8d8;
+    font-weight: 300;
+    line-height: 25px;
+    letter-spacing: 2px;
+    text-align: center;
+}
+.footer__container {
+    display: flex;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0px auto;
+}
+.naming {
+    width: 50%;
+}
+.naming__text {
+    margin: 2% 0 1%;
+}
+.company {
+    width: 50%;
+}
+.company__text {
+    margin: 2% 0 1%;
+}
+
+@media (max-width: 800px) {
+    .footer {
+        font-size: 14px;
+    }
+    .about__text {
+        width: 80%;
+        font-size: 25px;
+    }
+    .center {
+        font-size: 35px;
+    }
+    .login, .register {
+        width: 45%;
+    }
+}

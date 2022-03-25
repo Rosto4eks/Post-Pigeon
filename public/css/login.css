@@ -9,13 +9,13 @@ input {
 .header {
     margin-top: 10px;
     background-color: white;
-    width: 80%;
+    width: 60%;
     box-shadow: 0 5px 20px 0 #00000080;
     border-radius: 0 30px 30px 0;
 }
 .header__text {
-    margin-left: 10%;
-    color: #9deb9d;
+    margin-left: 20%;
+    color: #6ab36a;
     font-family: 'Mulish', sans-serif;
     font-weight: 800;
     font-size: 50px;
@@ -143,6 +143,9 @@ input {
 }
 
 @media (max-width: 800px) {
+    .header {
+        width: 80%;
+    }
     .header__text {
         font-size: 36px;
     }

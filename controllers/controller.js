@@ -1,6 +1,10 @@
 const LightDB = require('../models/LightDB')
 const User = LightDB.User
 
+exports.sendAboutPage = (req, res) => {
+    res.render('about')
+}
+
 exports.sendRegisterPage = (req, res) => {
     res.render('login', {
         pageName: 'Register',
@@ -8,7 +12,7 @@ exports.sendRegisterPage = (req, res) => {
         name: true,
         repeat: true,
         buttonValue: 'зарегистрироваться',
-        href1: '/',
+        href1: '/about',
         href2: '/login',
         button1: 'на главную',
         button2: 'войти',
@@ -39,7 +43,7 @@ exports.registration = (req, res) => {
                         repeat: true,
                         errorMessage: 'ошибка регистрации',
                         buttonValue: 'зарегистрироваться',
-                        href1: '/',
+                        href1: '/about',
                         href2: '/login',
                         button1: 'на главную',
                         button2: 'войти',
@@ -54,7 +58,7 @@ exports.registration = (req, res) => {
                     repeat: true,
                     errorMessage: 'пароли не совпадают',
                     buttonValue: 'зарегистрироваться',
-                    href1: '/',
+                    href1: '/about',
                     href2: '/login',
                     button1: 'на главную',
                     button2: 'войти',
@@ -69,7 +73,7 @@ exports.registration = (req, res) => {
                 repeat: true,
                 errorMessage: 'этот логин занят',
                 buttonValue: 'зарегистрироваться',
-                href1: '/',
+                href1: '/about',
                 href2: '/login',
                 button1: 'на главную',
                 button2: 'войти',
@@ -84,7 +88,7 @@ exports.registration = (req, res) => {
             repeat: true,
             errorMessage: 'не все поля заполнены',
             buttonValue: 'зарегистрироваться',
-            href1: '/',
+            href1: '/about',
             href2: '/login',
             button1: 'на главную',
             button2: 'войти',
@@ -97,10 +101,10 @@ exports.sendLoginPage = (req, res) => {
         pageName: 'login',
         action: 'login',
         buttonValue: 'войти',
-        href1: '/',
+        href1: '/about',
         href2: '/register',
         button1: 'на главную',
-        button2: 'зарегистрироваться',
+        button2: 'регитстрация',
     });
 };
 exports.login = (req, res) => {
@@ -114,10 +118,10 @@ exports.login = (req, res) => {
                 action: 'login',
                 errorMessage: 'пользователь не найден',
                 buttonValue: 'войти',
-                href1: '/',
+                href1: '/about',
                 href2: '/register',
                 button1: 'на главную',
-                button2: 'зарегистрироваться',
+                button2: 'регитстрация',
             })
         } 
         else {
@@ -133,10 +137,10 @@ exports.login = (req, res) => {
                     action: 'login',
                     errorMessage: 'неверный пароль',
                     buttonValue: 'войти',
-                    href1: '/',
+                    href1: '/about',
                     href2: '/register',
                     button1: 'на главную',
-                    button2: 'зарегистрироваться',
+                    button2: 'регитстрация',
                 })
             } 
         }
@@ -147,10 +151,10 @@ exports.login = (req, res) => {
             action: 'login',
             errorMessage: 'не все поля заполнены',
             buttonValue: 'войти',
-            href1: '/',
+            href1: '/about',
             href2: '/register',
             button1: 'на главную',
-            button2: 'зарегистрироваться',
+            button2: 'регитстрация',
         })
     }
 }
@@ -162,8 +166,12 @@ exports.sendChatPage = (req, res) => {
     }
     else {
         res.redirect('/login')
-    };
-};
+    }
+}
+
+exports.chatRedirect = (req, res) => {
+    res.redirect('/chat')
+}
 
 exports.loginRedirect = (req, res) => {
     if(req.cookies.login != null) {
@@ -171,8 +179,12 @@ exports.loginRedirect = (req, res) => {
     }
     else {
         res.redirect('/login')
-    };
-};
+    }
+}
+
+exports.sendAdminPage = (req, res) => {
+    res.render('admin')
+}
 
 exports.error404 = (req, res) => {
     res.render('404')
