@@ -113,6 +113,10 @@ input {
     box-shadow: 0 5px 5px 0 #00000080;
     transition: 200ms;
 }
+.login__button:hover {
+    background-color: #7dcc88;
+    transition: 400ms;
+}
 .login__button:active {
     background-color:#ffffff;
     transition: 200ms;
@@ -135,13 +139,13 @@ input {
     background-color: #f1f1f1;
     color: #4e4e4e;
     box-shadow: 0 10px 10px 0 #00000080;
-    transition: 200ms;
+    transition: 400ms;
 }
-.register:active {
-    background-color:#9deb9d;
-    transition: 200ms;
+.button:hover {
+    background-color: #a9d4a9;
+    box-shadow: 0 5px 5px 0 #00000080;
+    transition: 400ms;
 }
-
 @media (max-width: 800px) {
     .header {
         width: 80%;

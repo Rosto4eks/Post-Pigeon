@@ -1,6 +1,6 @@
 [
   {
-    "nextID": 2
+    "nextID": 3
   },
   {
     "Admin": {
@@ -13,6 +13,12 @@
       "id": 1,
       "name": "Rostislav4ik",
       "password": "N3WacDOZRgJVQ",
+      "role": "User"
+    },
+    "JoeBiden": {
+      "id": 2,
+      "name": "Joe Biden",
+      "password": "CwQacDeLUCp8SHG",
       "role": "User"
     }
   }

@@ -52,31 +52,85 @@ body {
     font-size: 40px;
     text-align: center;
 }
+.enter {
+    color:#474747;
+    text-decoration: none;
+    width: 63%;
+    display: flex;
+    margin: 2% auto 5% auto;
+    background-color: #f7f7f7;
+    box-shadow: 0 5px 20px 0 #00000080;
+    border-radius: 30px;
+    padding: 10px 0 10px 0;
+    transition: 400ms;
+
+}
+.enter:hover {
+    color: #ffffff;
+    background-color: #a9d4a9;
+    box-shadow: 0 5px 5px 0 #00000080;
+    transition: 400ms;
+}
+.enter:active {
+    background-color: #ffffff;
+}
+.enter__text {
+    margin: 0 auto;
+    font-family: 'Mulish', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;  
+}
 .redirect {
     display: flex;
     justify-content: space-around;
     text-align: center;
-    color:#e7e7e7;
     background-color: #474747;
     font-family: 'Mulish', sans-serif;
     font-size: 25px;
     font-weight: 700;
 }
 .login {
+    color:#ffffff;
+    text-decoration: none;
     border-radius: 30px;
     padding: 10px 0 10px;
     margin: 2% 0 2%;
     width: 30%;
     background-color: #8bcf89;
+    box-shadow: 0 5px 20px 0 #00000080;
+    transition: 400ms;
+}
+.login:hover {
+    background-color: #71ac9a;
+    color: #ffffff;
+    box-shadow: 0 5px 5px 0 #00000080;
+    transition: 400ms;
+}
+.login:active {
+    background-color: #ffffff;
 }
 .register {
+    color:#ffffff;
+    text-decoration: none;
     border-radius: 30px;
     padding: 10px 0 10px;
     margin: 2% 0 2%;
     width: 30%;
     background-color: #8bcf89;
+    box-shadow: 0 5px 20px 0 #00000080;
+    transition: 400ms;
+    
 }
-
+.register:hover {
+    background-color: #71ac9a;
+    color: #ffffff;
+    box-shadow: 0 5px 5px 0 #00000080;
+    transition: 400ms;
+}
+.register:active {
+    background-color: #ffffff;
+}
 
 .footer {
     font-family: 'Mulish', sans-serif;
@@ -114,13 +168,21 @@ body {
         font-size: 14px;
     }
     .about__text {
-        width: 80%;
+        width: 85%;
         font-size: 25px;
     }
     .center {
         font-size: 35px;
     }
+    .enter {
+        width: 90%;
+    }
+    .redirect {
+        flex-direction: column;
+    }
     .login, .register {
-        width: 45%;
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%;
     }
 }
