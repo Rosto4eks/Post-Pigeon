@@ -139,6 +139,13 @@ module.exports.getName = (login) => {
     return database[1][login].name
 }
 
+module.exports.getCount = () => {
+    let count = 0
+    for (let dataUser in database[1]) {
+        count++
+    }
+    return count
+}
 hash = (password) => {
     let newPass= ''
     const symbols = 'mw3HQWGikeFaxCrcLoDUzXdEKslMjBbq4NhfI1pgA8PYyZ67Ru0TtnO2JS5Vv9'

@@ -40,34 +40,38 @@ body {
 .about__text {
     background-color: #ffffff;
     box-shadow: 0 5px 20px 0 #00000080;
-    padding: 0 20px 40px 20px;
+    padding: 0 5px 40px 5px;
     font-size: 30px;
     font-weight: 700;
     color:#5a5a5a;
     border-radius: 30px;
     width: 60%;
-    margin: 2% auto 2%;
+    margin: 2% auto 5%;
+    transition: 400ms;
+}
+.about__text:hover {
+    transform: scale(1.1);
+    transition: 400ms;
 }
 .center {
     font-size: 40px;
     text-align: center;
 }
 .enter {
-    color:#474747;
+    color:#f7f7f7;
     text-decoration: none;
-    width: 63%;
+    width: 60%;
     display: flex;
     margin: 2% auto 5% auto;
-    background-color: #f7f7f7;
+    background-color: #474747;
     box-shadow: 0 5px 20px 0 #00000080;
     border-radius: 30px;
-    padding: 10px 0 10px 0;
+    padding: 10px 5px 10px 5px;
     transition: 400ms;
-
 }
 .enter:hover {
-    color: #ffffff;
-    background-color: #a9d4a9;
+    background-color: #eeeeee;
+    color: #383838;
     box-shadow: 0 5px 5px 0 #00000080;
     transition: 400ms;
 }
@@ -81,11 +85,30 @@ body {
     font-weight: 700;
     text-align: center;  
 }
+.count__text {
+    width: 60%;
+    border-radius: 30px;
+    background-color: #f7f7f7;
+    margin: 0 auto 5%;
+    padding: 5px 5px 5px 5px;
+    text-align: center;
+    color:#5a5a5a;
+    font-family: 'Mulish', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    box-shadow: 0 5px 20px 0 #00000080;
+    transition: 400ms;
+}
+.count__text:hover {
+    transform: scale(1.1);
+    transition: 400ms;
+}
 .redirect {
     display: flex;
     justify-content: space-around;
     text-align: center;
     background-color: #474747;
+    padding: 0 5px 0 5px;
     font-family: 'Mulish', sans-serif;
     font-size: 25px;
     font-weight: 700;
@@ -94,16 +117,16 @@ body {
     color:#ffffff;
     text-decoration: none;
     border-radius: 30px;
-    padding: 10px 0 10px;
     margin: 2% 0 2%;
     width: 30%;
     background-color: #8bcf89;
+    padding: 10px 5px 10px 5px;
     box-shadow: 0 5px 20px 0 #00000080;
     transition: 400ms;
 }
 .login:hover {
-    background-color: #71ac9a;
-    color: #ffffff;
+    background-color: #abf0ba;
+    color: #383838;
     box-shadow: 0 5px 5px 0 #00000080;
     transition: 400ms;
 }
@@ -114,7 +137,7 @@ body {
     color:#ffffff;
     text-decoration: none;
     border-radius: 30px;
-    padding: 10px 0 10px;
+    padding: 10px 5px 10px 5px;
     margin: 2% 0 2%;
     width: 30%;
     background-color: #8bcf89;
@@ -123,8 +146,8 @@ body {
     
 }
 .register:hover {
-    background-color: #71ac9a;
-    color: #ffffff;
+    background-color: #abf0ba;
+    color: #383838;
     box-shadow: 0 5px 5px 0 #00000080;
     transition: 400ms;
 }
@@ -168,21 +191,24 @@ body {
         font-size: 14px;
     }
     .about__text {
-        width: 85%;
+        width: 80%;
         font-size: 25px;
     }
     .center {
         font-size: 35px;
     }
     .enter {
-        width: 90%;
+        width: 80%;
     }
     .redirect {
         flex-direction: column;
     }
+    .count__text {
+        width: 80%;
+    }
     .login, .register {
         margin-left: auto;
         margin-right: auto;
-        width: 90%;
+        width: 80%;
     }
 }

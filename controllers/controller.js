@@ -2,7 +2,9 @@ const LightDB = require('../models/LightDB')
 const User = LightDB.User
 
 exports.sendAboutPage = (req, res) => {
-    res.render('about')
+    res.render('about', {
+        count: LightDB.getCount
+    })
 }
 
 exports.sendRegisterPage = (req, res) => {

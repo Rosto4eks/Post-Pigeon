@@ -1,6 +1,6 @@
 [
   {
-    "nextID": 3
+    "nextID": 5
   },
   {
     "Admin": {
@@ -19,6 +19,18 @@
       "id": 2,
       "name": "Joe Biden",
       "password": "CwQacDeLUCp8SHG",
+      "role": "User"
+    },
+    "DonaldDuck": {
+      "id": 3,
+      "name": "Дональд дак",
+      "password": "KDX2xcjElgJVQ",
+      "role": "User"
+    },
+    "Obeme123": {
+      "id": 4,
+      "name": "Обама",
+      "password": "JqhawQap8SHG",
       "role": "User"
     }
   }
