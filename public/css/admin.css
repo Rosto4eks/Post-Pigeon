@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #95d385; 
+}
+
+table {
+    width: 100%;
+    background-color: #ffffff;
+    font-family: 'Mulish', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+}
+tr {
+    color:#ffffff;
+    background-color: #447542;
+}
+td {
+    font-weight: 800;
+    color:#3d3d3d;
+    padding-left: 10px;
+    background-color: #95d385; 
+}
+
+.role__button {
+    color:#97231b;
+}

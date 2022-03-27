@@ -18,6 +18,8 @@ router.get('/chat', controller.sendChatPage)
 
 router.get('/admin', controller.sendAdminPage)
 
+router.post('/admin', jsonParser, controller.admin)
+
 router.get('/', controller.chatRedirect)
 
 router.get('*', controller.error404)

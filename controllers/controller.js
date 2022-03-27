@@ -1,4 +1,5 @@
 const LightDB = require('../models/LightDB')
+let database = require('../models/database.json')
 const User = LightDB.User
 
 exports.sendAboutPage = (req, res) => {
@@ -185,7 +186,17 @@ exports.loginRedirect = (req, res) => {
 }
 
 exports.sendAdminPage = (req, res) => {
-    res.render('admin')
+    if (req.cookies.login != null && database[1][req.cookies.login].role === 'Admin')
+    {
+        res.render('admin') 
+    }
+    else {
+        res.redirect('/about')
+    }
+}
+
+exports.admin = (req, res) => {
+    res.json(database[1])
 }
 
 exports.error404 = (req, res) => {

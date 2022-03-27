@@ -146,6 +146,7 @@ module.exports.getCount = () => {
     }
     return count
 }
+
 hash = (password) => {
     let newPass= ''
     const symbols = 'mw3HQWGikeFaxCrcLoDUzXdEKslMjBbq4NhfI1pgA8PYyZ67Ru0TtnO2JS5Vv9'

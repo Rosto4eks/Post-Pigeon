@@ -1,6 +1,6 @@
 [
   {
-    "nextID": 5
+    "nextID": 6
   },
   {
     "Admin": {
@@ -31,6 +31,12 @@
       "id": 4,
       "name": "Обама",
       "password": "JqhawQap8SHG",
+      "role": "User"
+    },
+    "Tupik": {
+      "id": 5,
+      "name": "tupik",
+      "password": "gJVQNIv70",
       "role": "User"
     }
   }
