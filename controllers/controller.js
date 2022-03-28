@@ -168,7 +168,7 @@ exports.sendChatPage = (req, res) => {
          res.render('chat')
     }
     else {
-        res.redirect('/login')
+        res.redirect('/about')
     }
 }
 

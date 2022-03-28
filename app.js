@@ -1,6 +1,7 @@
 const express = require('express'),
     server = express(),
     router = require('./routes/router'),
+    socketRouter = require('./routes/socketRouter'),
     http = require('http').createServer(server),
     cookieParser = require('cookie-parser'),
     io = require('socket.io')(http),
@@ -13,11 +14,7 @@ server.use(cookieParser('Rosto4eks Limited'))
 server.use('/', router)
 
 // connecting socket to chat
-io.on('connection', (socket) => {
-    socket.on('chat message', (data) => {
-        io.emit('chat message', {login: data.login, name: data.name, message: data.message});
-    })
-})
+io.on('connection', socketRouter)
 
 const PORT = 1337;
 
