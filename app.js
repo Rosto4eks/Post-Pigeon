@@ -14,8 +14,9 @@ server.set('view engine', 'hbs')
 server.use(cookieParser('Rosto4eks Limited'))
 server.use('/', router)
 
-// connecting socket to chat
+// connecting socket 
 io.on('connection', (socket) => {
+    // send all messages from database
     for (elem in MessagesData[1]) {
         socket.emit('chat message', {login: MessagesData[1][elem]["login"], name: MessagesData[1][elem]["name"], date: MessagesData[1][elem]["date"], time:MessagesData[1][elem]["time"] ,message: MessagesData[1][elem]["message"]});
     }
@@ -24,7 +25,9 @@ io.on('connection', (socket) => {
         let id = MessagesData[0].nextID
         MessagesData[1][id] = {"login": data.login,"name": data.name, "date": data.date, "time": data.time ,"message": data.message}
         MessagesData[0]["nextID"]++
+        // sasving message in databse
         fs.writeFile('data/data.json', JSON.stringify(MessagesData, null, 2), ()=>{})
+        // sending message
         io.emit('chat message', {login: data.login, name: data.name, date: data.date, time: data.time ,message: data.message});
     })
 })
