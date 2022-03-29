@@ -1,48 +1,18 @@
 [
   {
-    "nextID": 7
+    "nextID": 2
   },
   {
     "Admin": {
       "id": 0,
-      "name": "Rosto4eks",
-      "password": "O0nAxco",
+      "name": "Администратор",
+      "password": "CEl3ka2p8SHG",
       "role": "Admin"
     },
-    "Rosto4eks": {
+    "Rosto4ek": {
       "id": 1,
-      "name": "Rostislav4ik",
+      "name": "Rosto4eks",
       "password": "N3WacDOZRgJVQ",
-      "role": "User"
-    },
-    "JoeBiden": {
-      "id": 2,
-      "name": "Joe Biden",
-      "password": "CwQacDeLUCp8SHG",
-      "role": "User"
-    },
-    "DonaldDuck": {
-      "id": 3,
-      "name": "Дональд дак",
-      "password": "KDX2xcjElgJVQ",
-      "role": "User"
-    },
-    "Obeme123": {
-      "id": 4,
-      "name": "Обама",
-      "password": "JqhawQap8SHG",
-      "role": "User"
-    },
-    "Tupik": {
-      "id": 5,
-      "name": "tupik",
-      "password": "gJVQNIv70",
-      "role": "User"
-    },
-    "Pirates": {
-      "id": 6,
-      "name": "Абобус123",
-      "password": "N3WacDOZR",
       "role": "User"
     }
   }

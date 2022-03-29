@@ -79,6 +79,7 @@ input {
 }
 .block {
     min-width: 150px;
+    max-width: 80%;
     display: flex;
     margin: 10px;
     padding: 10px;
@@ -90,6 +91,7 @@ input {
 }
 .yourBlock {
     min-width: 150px;
+    max-width: 80%;
     display: flex;
     margin: 10px 10px 10px auto;
     padding: 10px;
