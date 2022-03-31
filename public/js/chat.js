@@ -3,11 +3,11 @@ const messages = document.querySelector('.messages')
 const form = document.querySelector('.form')
 const input = document.querySelector('.input')
 
+socket.emit('join', window.location.pathname)
 function getCookie(name) {
 	var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"))
 	return matches ? decodeURIComponent(matches[1]) : undefined
 }
- 
 Name = getCookie("name")
 login = getCookie("login")
 
@@ -21,7 +21,7 @@ form.addEventListener('submit', (e) => {
         let minutes = fulldate.getMinutes()
         if (minutes < 10) {minutes = `0${minutes}`}
         const time = hours + ':' + minutes
-        socket.emit('chat message', {login: login, name: Name, date: date, time: time,message: input.value})
+        socket.emit('chat message', {path: window.location.pathname, login: login, name: Name, date: date, time: time, message: input.value})
         input.value = ''
     };
 });

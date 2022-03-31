@@ -165,7 +165,9 @@ exports.login = (req, res) => {
 
 exports.sendChatPage = (req, res) => {
     if(req.cookies.login != null) {
-         res.render('chat')
+         res.render('chat', {
+             name: req.params["chatName"]
+         })
     }
     else {
         res.redirect('/about')
@@ -173,12 +175,12 @@ exports.sendChatPage = (req, res) => {
 }
 
 exports.chatRedirect = (req, res) => {
-    res.redirect('/chat')
+    res.redirect('/chats')
 }
 
 exports.loginRedirect = (req, res) => {
     if(req.cookies.login != null) {
-        res.redirect('/chat')
+        res.redirect('/chats')
     }
     else {
         res.redirect('/login')

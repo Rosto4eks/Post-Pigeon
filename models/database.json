@@ -1,6 +1,6 @@
 [
   {
-    "nextID": 2
+    "nextID": 3
   },
   {
     "Admin": {
@@ -12,6 +12,12 @@
     "Rosto4ek": {
       "id": 1,
       "name": "Rosto4eks",
+      "password": "N3WacDOZRgJVQ",
+      "role": "User"
+    },
+    "Rostislav": {
+      "id": 2,
+      "name": "Рикардо",
       "password": "N3WacDOZRgJVQ",
       "role": "User"
     }
