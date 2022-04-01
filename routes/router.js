@@ -14,7 +14,7 @@ router.get('/login', controller.sendLoginPage)
 
 router.post('/login', urlencodedParser, controller.login)
 
-router.get('/:chatName', controller.sendChatPage)
+router.get('/chats/:chatName', controller.sendChatPage)
 
 router.get('/admin', controller.sendAdminPage)
 

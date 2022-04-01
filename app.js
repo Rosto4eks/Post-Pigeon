@@ -17,20 +17,29 @@ server.use('/', router)
 io.on('connection', (socket) => {
     // send all messages from database
     socket.on('join', (data) => {
-        MessagesData = require(`./data${data}.json`)
-        for (elem in MessagesData[1]) {
-            socket.emit('chat message', {login: MessagesData[1][elem]["login"], name: MessagesData[1][elem]["name"], date: MessagesData[1][elem]["date"], time:MessagesData[1][elem]["time"] ,message: MessagesData[1][elem]["message"]});
-        }
+        fs.readFile(`./data${data}.json`, (error,  MessagesData) => {
+            if (error === null) {
+                socket.join(data)
+                MessagesData = JSON.parse(MessagesData)
+                for (elem in MessagesData[1]) {
+                    socket.emit('chat message', {login: MessagesData[1][elem]["login"], name: MessagesData[1][elem]["name"], date: MessagesData[1][elem]["date"], time:MessagesData[1][elem]["time"] ,message: MessagesData[1][elem]["message"]});
+                }
+            }
+            else {
+                socket.emit('redirect', '/chats');
+            }
+        })
     })
 
     socket.on('chat message', (data) => {
+        let MessagesData = require(`./data${data.path}.json`)
         let id = MessagesData[0].nextID
         MessagesData[1][id] = {"login": data.login,"name": data.name, "date": data.date, "time": data.time ,"message": data.message}
         MessagesData[0]["nextID"]++
         // sasving message in databse
         fs.writeFile(`data${data.path}.json`, JSON.stringify(MessagesData, null, 2), ()=>{})
         // sending message
-        io.emit('chat message', {login: data.login, name: data.name, date: data.date, time: data.time ,message: data.message});
+        io.to(data.path).emit('chat message', {login: data.login, name: data.name, date: data.date, time: data.time ,message: data.message});
     })
 })
 

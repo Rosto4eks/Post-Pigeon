@@ -3,6 +3,10 @@ const messages = document.querySelector('.messages')
 const form = document.querySelector('.form')
 const input = document.querySelector('.input')
 
+socket.on('redirect', (destination) => {
+    window.location.href = destination;
+})
+
 socket.emit('join', window.location.pathname)
 function getCookie(name) {
 	var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"))
@@ -36,4 +40,5 @@ socket.on('chat message', (data) => {
     }
     messages.appendChild(item)
     messages.scrollTo(0, messages.scrollHeight)
-});
+})
+

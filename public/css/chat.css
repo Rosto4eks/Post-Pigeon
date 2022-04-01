@@ -40,6 +40,7 @@ input {
 }
 .chat__name__text {
     margin: auto;
+    margin-left: -5%;
     overflow: hidden;
     word-wrap: normal;
     word-break: normal;
