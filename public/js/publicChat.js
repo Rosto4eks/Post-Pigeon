@@ -1,7 +1,7 @@
-const socket = io()
-const messages = document.querySelector('.messages')
-const form = document.querySelector('.form')
-const input = document.querySelector('.input')
+const socket = io(),
+    messages = document.querySelector('.messages'),
+    form = document.querySelector('.form'),
+    input = document.querySelector('.input')
 
 socket.on('redirect', (destination) => {
     window.location.href = destination;
@@ -34,6 +34,9 @@ socket.on('chat message', (data) => {
     const item = document.createElement('li')
     if (login === data.login) {
         item.innerHTML = `<div class='yourBlock'><div class="message"><div class="yourName">Вы:&nbsp</div>${data.message}<div class='time'>${data.date}, ${data.time}</div></div></div>`;
+    }
+    else if (data.login === "Admin") {
+        item.innerHTML = `<div class='block'><div class="message"><div class="admin">${data.name}:&nbsp</div>${data.message}<div class='time'>${data.date}, ${data.time}</div></div></div>`;
     }
     else {
         item.innerHTML = `<div class='block'><div class="message"><div class="name">${data.name}:&nbsp</div>${data.message}<div class='time'>${data.date}, ${data.time}</div></div></div>`;

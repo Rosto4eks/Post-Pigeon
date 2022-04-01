@@ -1,21 +1,21 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #bff3bf;
+    background-color: #272727;
 }
 input {
     padding: 8px 20px 8px 20px;
 }
 .header {
     margin-top: 10px;
-    background-color: white;
+    background-color: #6ab36a;
     width: 60%;
     box-shadow: 0 5px 20px 0 #00000080;
     border-radius: 0 30px 30px 0;
 }
 .header__text {
     margin-left: 20%;
-    color: #6ab36a;
+    color: #f4f4f4;
     font-family: 'Mulish', sans-serif;
     font-weight: 800;
     font-size: 50px;
@@ -109,7 +109,7 @@ input {
     padding: 8px 0 8px 0;
     background-color: #9deb9d;
     margin-top: 5%;
-    color:#4e4e4e;
+    color:#333333;
     box-shadow: 0 5px 5px 0 #00000080;
     transition: 200ms;
 }
@@ -137,7 +137,7 @@ input {
     border-radius: 20px;
     padding: 8px 0 8px 0;
     background-color: #f1f1f1;
-    color: #4e4e4e;
+    color: #313131;
     box-shadow: 0 10px 10px 0 #00000080;
     transition: 400ms;
 }

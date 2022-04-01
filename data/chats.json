@@ -1,0 +1,23 @@
+{
+    "starling": {
+        "href": "/chats/starling",
+        "type": "private",
+        "name": "Starling новости",
+        "author": "Admin",
+        "color": "#0af282"
+    },
+    "global": {
+        "href": "/chats/global",
+        "type": "public",
+        "name": "Общий чат",
+        "author": "Admin",
+        "color": "#a612c7"
+    },
+    "test": {
+        "href": "/chats/test",
+        "type": "private",
+        "name": "Тестовый чат",
+        "author": "Admin",
+        "color": "#5793cf"
+    }
+}

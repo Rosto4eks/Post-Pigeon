@@ -31,7 +31,7 @@ class User {
             this.id = database[0].nextID
             database[1][this.login] = {"id": this.id,"name": this.name, "password": hash(this.password), "role": this.role}
             database[0]["nextID"]++
-            fs.writeFile('models/database.json', JSON.stringify(database, null, 2), ()=>{})
+            fs.writeFile('data/database.json', JSON.stringify(database, null, 2), ()=>{})
             return true
         }
     }
@@ -40,7 +40,7 @@ class User {
         // checking if the user exists in the database
         if (this.find() === true) {
             delete database[1][this.login]
-            fs.writeFile('models/database.json', JSON.stringify(database, null, 2), ()=>{})
+            fs.writeFile('data/database.json', JSON.stringify(database, null, 2), ()=>{})
             return true
         }
         else {
@@ -54,15 +54,15 @@ class User {
             switch( property ) {
                 case "name":
                     database[1][this.login].name = newValue;
-                    fs.writeFile('models/database.json', JSON.stringify(database, null, 2), ()=>{})
+                    fs.writeFile('data/database.json', JSON.stringify(database, null, 2), ()=>{})
                     return true
                 case "password":
                     database[1][this.login].password = hash(newValue);
-                    fs.writeFileSync('models/database.json', JSON.stringify(database, null, 2), ()=>{})
+                    fs.writeFileSync('data/database.json', JSON.stringify(database, null, 2), ()=>{})
                     return true
                 case "role":
                     database[1][this.login].role = newValue;
-                    fs.writeFileSync('models/database.json', JSON.stringify(database, null, 2), ()=>{})
+                    fs.writeFileSync('data/database.json', JSON.stringify(database, null, 2), ()=>{})
                     return true
                 default: 
                     console.log('property does not exist, value must be = name/password/role')
@@ -91,7 +91,7 @@ module.exports.findUser = (login) => {
 module.exports.deleteUser = (login) => {
     if (findUser(login) === true) {
         delete database[1][login]
-        fs.writeFile('models/database.json', JSON.stringify(database, null, 2), ()=>{})
+        fs.writeFile('data/database.json', JSON.stringify(database, null, 2), ()=>{})
         return true
     }
     else {
@@ -105,15 +105,15 @@ module.exports.changeUser = (login, property, newValue) => {
         switch( property ) {
             case "name":
                 database[1][login].name = newValue
-                fs.writeFile('models/database.json', JSON.stringify(database, null, 2), ()=>{})
+                fs.writeFile('data/database.json', JSON.stringify(database, null, 2), ()=>{})
                 return true
             case "password":
                 database[1][login].password = hash(newValue);
-                fs.writeFile('models/database.json', JSON.stringify(database, null, 2), ()=>{});
+                fs.writeFile('data/database.json', JSON.stringify(database, null, 2), ()=>{});
                 return true
             case "role":
                 database[1][login].role = newValue;
-                fs.writeFile('models/database.json', JSON.stringify(database, null, 2), ()=>{});
+                fs.writeFile('data/database.json', JSON.stringify(database, null, 2), ()=>{});
                 return true
             default: 
                 console.log('error')

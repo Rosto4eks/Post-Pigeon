@@ -14,6 +14,10 @@ router.get('/login', controller.sendLoginPage)
 
 router.post('/login', urlencodedParser, controller.login)
 
+router.get('/chats', controller.sendChatsPage)
+
+router.post('/chats', jsonParser, controller.chats)
+
 router.get('/chats/:chatName', controller.sendChatPage)
 
 router.get('/admin', controller.sendAdminPage)

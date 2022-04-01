@@ -13,7 +13,7 @@ input {
 }
 
 .content {
-    background-color: #bff3bf;
+    background-color: #2c2c2c;
     display: flex;
     flex-direction: column;
     margin: 0 auto;
@@ -23,7 +23,7 @@ input {
     width: 100%;
     display: flex;
     height: 80px;
-    background-color: #2c2c2c;
+    background-color: #212121;
 }
 .back {
     margin-left: 1%;
@@ -40,10 +40,9 @@ input {
 }
 .chat__name__text {
     margin: auto;
-    margin-left: -5%;
+    padding-right: 5%;
     overflow: hidden;
-    word-wrap: normal;
-    word-break: normal;
+    white-space: nowrap;
     text-align: center;
     color:#fafafa;
     font-family: 'Mulish', sans-serif;
@@ -51,7 +50,8 @@ input {
     font-size: 25px;
 }
 .footer {
-    background-color: #2c2c2c;
+    height: 56px;
+    background-color: #212121;
     width: 100%;
     position: fixed;
     bottom: 0;
@@ -68,7 +68,7 @@ input {
     border: none;
     border-bottom: 3px solid #9deb9d;
     text-decoration: none;
-    background-color: #2c2c2c;
+    background-color: #212121;
     color: #fdfdfd;
     border-radius: 30px 0 0 30px;
     width: 90%;
@@ -83,7 +83,7 @@ input {
 }
 .button {
     border: none;
-    background-color: #2c2c2c;
+    background-color: #212121;
     border-radius: 0 30px 30px 0;
     background-image: url(../images/arrow.png);
     background-size:contain;
@@ -137,13 +137,19 @@ input {
     display:inline;
     font-weight: 700;
     font-style: italic;
-    color: #228681;
+    color: #599059;
 }
 .yourName {
     display:inline;
     font-weight: 700;
     font-style: italic;
     color: #c041d1; 
+}
+.admin {
+    display:inline;
+    font-weight: 700;
+    font-style: italic;
+    color: #c12525; 
 }
 .message {
     word-break: break-word;

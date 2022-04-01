@@ -1,0 +1,70 @@
+[
+  {
+    "nextID": 9
+  },
+  {
+    "0": {
+      "login": "Admin",
+      "name": "Rostislav",
+      "date": "29.03.2022",
+      "time": "22:03",
+      "message": "Это общий чат. Общайтесь культурно, уважайте себя и остальных"
+    },
+    "1": {
+      "login": "Arianna",
+      "name": "Арианна",
+      "date": "01.04.2022",
+      "time": "20:24",
+      "message": "Всем привет!"
+    },
+    "2": {
+      "login": "WillSmith",
+      "name": "Уилл Смит",
+      "date": "01.04.2022",
+      "time": "20:30",
+      "message": "Приветствую"
+    },
+    "3": {
+      "login": "JohnyDepp",
+      "name": "Джонни Депп",
+      "date": "01.04.2022",
+      "time": "20:32",
+      "message": "Как дела у вас, ребята?"
+    },
+    "4": {
+      "login": "Rosto4ek",
+      "name": "Rosto4eks",
+      "date": "01.04.2022",
+      "time": "20:36",
+      "message": "все хорошо, а у тебя?"
+    },
+    "5": {
+      "login": "JohnyDepp",
+      "name": "Джонни Депп",
+      "date": "01.04.2022",
+      "time": "20:37",
+      "message": "Тоже)"
+    },
+    "6": {
+      "login": "JohnyDepp",
+      "name": "Джонни Депп",
+      "date": "01.04.2022",
+      "time": "23:37",
+      "message": "1"
+    },
+    "7": {
+      "login": "Rosto4ek",
+      "name": "Rosto4eks",
+      "date": "01.04.2022",
+      "time": "23:37",
+      "message": "2"
+    },
+    "8": {
+      "login": "JohnyDepp",
+      "name": "Джонни Депп",
+      "date": "01.04.2022",
+      "time": "23:37",
+      "message": "3"
+    }
+  }
+]

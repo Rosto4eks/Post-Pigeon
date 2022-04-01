@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #e2e2e2;
+    background-color: #272727;
 }
 .content {
     margin: 10% 10px 10px 10px;
@@ -16,20 +16,20 @@ body {
     font-family: 'Mulish', sans-serif;
     font-weight: 800;
     font-size: 45px;
-    color: rgb(211, 26, 26)
+    color: #9deb9d;
 }
 .button {
     width: 40%;
     margin: 10% auto;
     font-family: 'Mulish', sans-serif;
-    font-weight: 700;
+    font-weight: 800;
     font-size: 25px;
     border: none;
     text-decoration: none;
     border-radius: 20px;
     padding: 8px 5px 8px 5px;
     background-color: #77d377;
-    color:#fdfdfd;
+    color:#353535;
     box-shadow: 0 5px 5px 0 #00000080;
 }
 .button:active {

@@ -1,5 +1,6 @@
-const LightDB = require('../models/LightDB')
-let database = require('../models/database.json')
+const LightDB = require('../data/LightDB')
+let database = require('../data/database.json')
+let chats = require('../data/chats.json')
 const User = LightDB.User
 
 exports.sendAboutPage = (req, res) => {
@@ -36,7 +37,7 @@ exports.registration = (req, res) => {
                 if (newUser.save() === true) {
                     res.cookie("login", newLogin, {'maxAge': 5000000000})
                     res.cookie("name", newName, {'maxAge': 5000000000})
-                    res.redirect('/chat')
+                    res.redirect('/chats')
                 }
                 else {
                     res.render('login', {
@@ -132,7 +133,7 @@ exports.login = (req, res) => {
             if (LightDB.checkPassword(newLogin, newPassword) === true) {
                 res.cookie("login", newLogin, {'maxAge': 5000000000})
                 res.cookie("name", LightDB.getName(newLogin), {'maxAge': 5000000000})
-                res.redirect('/chat')
+                res.redirect('/chats')
             }
             else {
                 res.render('login', {
@@ -162,12 +163,47 @@ exports.login = (req, res) => {
     }
 }
 
-
-exports.sendChatPage = (req, res) => {
+exports.sendChatsPage = (req, res) => {
     if(req.cookies.login != null) {
-         res.render('chat', {
+         res.render('chats', {
              name: req.params["chatName"]
          })
+    }
+    else {
+        res.redirect('/about')
+    }
+}
+
+exports.chats = (req, res) => {
+    res.json(chats)
+}
+exports.sendChatPage = (req, res) => {
+    if (req.cookies.login != null) {
+        if (chats[req.params["chatName"]] != undefined) {
+            if(chats[req.params["chatName"]].type != "private") {
+                res.render('chat', {
+                    name: chats[req.params["chatName"]].name,
+                    public: true,
+                    js: "/js/publicChat.js"
+                })
+            }
+            else if (chats[req.params["chatName"]].type === "private" && req.cookies.login === chats[req.params["chatName"]].author) {
+                res.render('chat', {
+                    name: chats[req.params["chatName"]].name,
+                    public: true,
+                    js: "/js/publicChat.js"
+                })
+            }
+            else if (chats[req.params["chatName"]].type === "private") {
+                res.render('chat', {
+                    name: chats[req.params["chatName"]].name,
+                    js: "/js/privateChat.js"
+                })
+            }
+        }
+        else {
+            res.redirect('/chats')
+        }
     }
     else {
         res.redirect('/about')

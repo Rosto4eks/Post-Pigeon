@@ -1,0 +1,43 @@
+[
+  {
+    "nextID": 6
+  },
+  {
+    "Admin": {
+      "id": 0,
+      "name": "Rostislav",
+      "password": "CEl3ka2p8SHG",
+      "role": "Admin"
+    },
+    "Rosto4ek": {
+      "id": 1,
+      "name": "Rosto4eks",
+      "password": "N3WacDOZRgJVQ",
+      "role": "User"
+    },
+    "Rostislav": {
+      "id": 2,
+      "name": "Рикардо",
+      "password": "N3WacDOZRgJVQ",
+      "role": "User"
+    },
+    "Arianna": {
+      "id": 3,
+      "name": "Арианна",
+      "password": "CcDexc2OSCp8SHG",
+      "role": "User"
+    },
+    "WillSmith": {
+      "id": 4,
+      "name": "Уилл Смит",
+      "password": "HkajMbMwQenJI",
+      "role": "User"
+    },
+    "JohnyDepp": {
+      "id": 5,
+      "name": "Джонни Депп",
+      "password": "bDXIOS6ElagPA",
+      "role": "User"
+    }
+  }
+]

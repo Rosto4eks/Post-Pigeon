@@ -1,25 +1,25 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #95d385; 
+    background-color: #313131; 
 }
 
 table {
     width: 100%;
-    background-color: #ffffff;
+    background-color: #6aa65e;
     font-family: 'Mulish', sans-serif;
     font-weight: 700;
     font-size: 18px;
 }
 tr {
     color:#ffffff;
-    background-color: #447542;
+    background-color: #212121;
 }
 td {
     font-weight: 800;
-    color:#3d3d3d;
+    color:#f2f2f2;
     padding-left: 10px;
-    background-color: #95d385; 
+    background-color: #313131; 
 }
 
 .role__button {

@@ -8,32 +8,24 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="/css/chat.css">
+    <link rel="stylesheet" href="/css/chats.css">
     <title>starling</title>
 </head>
 <body>
     <div class="content">
 
         <div class="header">
-            <a href="/chats" class="back"></a>
-            <div class="chat__name"><div class="chat__name__text">{{name}}</div></div>
+            <img src="/images/starling.png" class="logo">
+            <a href="/about" class="about">на главную</a>
+            <a href="/login" class="logout">выйти</a>
         </div>
 
-        <ul class="messages">
+        <ul class="chatlist">
         </ul>
 
-        <div class="footer">
-            {{#if public}}
-            <form class="form">
-                <input type="text" class="input" autocomplete="off" placeholder="Сообщение">
-                <button class="button"></button>
-            </form>
-            {{/if}}
-        </div>
     </div>
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src={{js}}></script>
+    <script src="/js/chats.js"></script>
 
 </body>
 </html>

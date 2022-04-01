@@ -1,0 +1,70 @@
+[
+  {
+    "nextID": 9
+  },
+  {
+    "0": {
+      "login": "Admin",
+      "name": "Rostislav",
+      "date": "01.04.2022",
+      "time": "22:30",
+      "message": "Чат, предназначенный для проверки работоспособности приложения"
+    },
+    "1": {
+      "login": "Admin",
+      "name": "Rostislav",
+      "date": "01.04.2022",
+      "time": "22:31",
+      "message": "1"
+    },
+    "2": {
+      "login": "Admin",
+      "name": "Rostislav",
+      "date": "01.04.2022",
+      "time": "22:31",
+      "message": "12"
+    },
+    "3": {
+      "login": "Admin",
+      "name": "Rostislav",
+      "date": "01.04.2022",
+      "time": "22:31",
+      "message": "12"
+    },
+    "4": {
+      "login": "Admin",
+      "name": "Rostislav",
+      "date": "01.04.2022",
+      "time": "23:09",
+      "message": ";"
+    },
+    "5": {
+      "login": "Admin",
+      "name": "Rostislav",
+      "date": "01.04.2022",
+      "time": "23:09",
+      "message": ";"
+    },
+    "6": {
+      "login": "Admin",
+      "name": "Rostislav",
+      "date": "01.04.2022",
+      "time": "23:09",
+      "message": ";"
+    },
+    "7": {
+      "login": "Admin",
+      "name": "Rostislav",
+      "date": "01.04.2022",
+      "time": "23:10",
+      "message": ";"
+    },
+    "8": {
+      "login": "Admin",
+      "name": "Rostislav",
+      "date": "01.04.2022",
+      "time": "23:10",
+      "message": ";"
+    }
+  }
+]
