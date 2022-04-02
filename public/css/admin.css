@@ -25,3 +25,7 @@ td {
 .role__button {
     color:#97231b;
 }
+
+::-webkit-scrollbar {
+    width: 0px; 
+}

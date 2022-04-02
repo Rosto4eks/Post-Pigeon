@@ -27,4 +27,5 @@ router.post('/admin', jsonParser, controller.admin)
 router.get('/', controller.chatRedirect)
 
 router.get('*', controller.error404)
+
 module.exports = router

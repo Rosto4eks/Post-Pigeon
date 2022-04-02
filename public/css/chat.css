@@ -6,6 +6,7 @@ ul {
     margin: 0;
 }
 li {
+    animation: show 0.8s 1;
     display: flex;
 }
 input {
@@ -175,4 +176,15 @@ input {
 
 ::-webkit-scrollbar {
     width: 0px; 
+}
+
+@keyframes show {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

@@ -170,7 +170,7 @@ exports.sendChatsPage = (req, res) => {
          })
     }
     else {
-        res.redirect('/about')
+        res.redirect('/login')
     }
 }
 
