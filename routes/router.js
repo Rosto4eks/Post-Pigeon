@@ -20,6 +20,10 @@ router.post('/chats', jsonParser, controller.chats)
 
 router.get('/chats/:chatName', controller.sendChatPage)
 
+router.get('/create', controller.sendCreatePage)
+
+router.post('/create', urlencodedParser, controller.create)
+
 router.get('/admin', controller.sendAdminPage)
 
 router.post('/admin', jsonParser, controller.admin)

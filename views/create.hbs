@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/create.css">
+    <title>starling</title>
+</head>
+<body>
+    <div class="header">
+        <a href="/chats" class="back">вернуться</a>
+    </div>
+
+    <form class="form" action="create" method="post">
+        <div class="message">{{message}}</div>
+        <input class="href" name='href' type="text" minlength="3" maxlength="18" autocomplete="off" placeholder="название ссылки">
+        <input class="name" name='name' type="text" minlength="3" maxlength="15" autocomplete="off" placeholder="название">
+        <div class="radios">
+            <div class="r">
+                <input type="radio" id="radio1" name="radio" value="public" checked>
+                <label for="radio1">открытый</label>
+        
+                <input type="radio" id="radio2" name="radio" value="private">
+                <label for="radio2">закрытый</label>
+
+            </div>
+        </div>
+        <div class="colors">
+            <input class="color__picker" id="color" name="color" type="color" value="#a9d4a9">
+            <label class="color" for="color">выбрать цвет</label>
+        </div>
+        <input class="button" type="submit" value="создать"></input>
+    </form>
+</body>
+</html>

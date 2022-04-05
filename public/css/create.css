@@ -1,0 +1,153 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #2a2a2a;
+    font-family: 'Mulish', sans-serif;
+    font-weight: 600;
+}
+
+.header {
+    position: sticky;
+    display: flex;
+    width: 100%;
+    height: 60px;
+    background-color: #212121;
+    font-size: 25px;
+}
+
+.back {
+    width: 33%;
+    margin: auto auto auto 30px;
+    text-decoration: none;
+    color: #ececec;
+    transition: 400ms;
+}
+.back:hover {
+    transform: scale(1.05) translateY(2px);
+    transition: 400ms;
+}
+
+form {
+    display: flex;
+    margin: 50px auto;
+    flex-direction: column;
+    width: 60%;
+}
+input {
+    padding: 8px 20px 8px 20px;
+    font-family: 'Mulish', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+}
+.message {
+    color: #dd3434;
+    font-weight: 400;
+    font-size: 22px;
+    margin: 0 0 10px 20px;
+}
+.href {
+    background-color: #f1f1f1;
+    border: none;
+    border-radius: 15px;
+    outline: none;
+    transition: 400ms;
+}
+.href::placeholder {
+    color: #212121;
+    font-family: 'Mulish', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+}
+.href:focus {
+    border: 3px solid #a9d4a9;
+    transition: 400ms;
+}
+.name {
+    margin-top: 20px;
+    background-color: #f1f1f1;
+    border: none;
+    border-radius: 15px;
+    outline: none;
+    transition: 400ms;
+}
+.name::placeholder {
+    color: #212121;
+    font-family: 'Mulish', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+}
+.name:focus {
+    border: 3px solid #a9d4a9;
+    transition: 400ms;
+}
+.radios {
+    margin: 20px auto 20px auto;
+    font-family: 'Mulish', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: #e4e4e4;
+}
+.r input[type="radio"] {
+    display: none;
+    transition: 400ms;
+}
+.r label {
+    padding: 2px 9px;
+    cursor: pointer;
+    border-radius: 15px;
+    transition: 400ms;
+}
+.r input[type="radio"]:checked+label {
+    background-color: #d0ffb7;
+    color: #2a2a2a;
+    border: none;
+    transition: 400ms;
+}
+.r label:hover {
+    border: none;
+    color: #2a2a2a;
+    background-color: #d0ffb7;
+    transition: 400ms;
+}
+.colors {
+    display: flex;
+    margin-top: 20px;
+}
+.color__picker{
+    display: flex;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background-color: #2a2a2a;
+}
+.color {
+    margin-top: auto;
+    margin-left: 20px;
+    color: #dcdcdc;
+    font-family: 'Mulish', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+}
+.button {
+    background-color: #f1f1f1;
+    margin-top: 20px;
+    border: 0;
+    border-radius: 15px;
+    transition: 400ms;
+}
+.button:hover {
+    background-color: #a9d4a9;
+    box-shadow: 0 5px 5px 0 #00000080;
+    transform: translateY(5px) scale(1.05);
+    transition: 400ms;
+}
+
+@media (max-width: 800px) {
+    .form {
+        width: 95%;
+    }
+    .radios {
+        font-size: 25px;
+    }
+}

@@ -46,15 +46,22 @@ a {
     background-color: #1c1c1c;
 }
 .logo {
-    margin: 10px 0 0 30px;
     height: 40px;
 }
 .about {
-    color: #ececec;
-    margin: auto 0 auto auto;
+    margin: auto auto auto 30px;
     transition: 400ms;
 }
 .about:hover {
+    transform: scale(1.05) translateY(2px);
+    transition: 400ms;
+}
+.create {
+    color: #ececec;
+    margin: auto;
+    transition: 400ms;
+}
+.create:hover {
     transform: scale(1.05) translateY(2px);
     transition: 400ms;
 }

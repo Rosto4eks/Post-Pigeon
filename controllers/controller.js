@@ -223,6 +223,41 @@ exports.loginRedirect = (req, res) => {
     }
 }
 
+exports.sendCreatePage = (req, res) => {
+    if(req.cookies.login != null) {
+        res.render('create')
+    }
+    else {
+        res.redirect('/login')
+    }
+}
+
+exports.create = (req, res) => {
+      // check if all fields are filled
+    if (req.body.href && req.body.name && req.body.radio && req.body.color) {
+        const href = req.body.href
+        const name = req.body.name
+        const radio = req.body.radio
+        const color = req.body.color
+
+        if (LightDB.findChat(href) === false) {
+            if (LightDB.saveChat(href, radio, name, req.cookies.login, color) === true) {
+                res.redirect(`/chats/${href}`)
+            }
+        }
+        else {
+            es.render('create', {
+                message: "такой чат уже существует"
+            }); 
+        }
+    }
+    else {
+        res.render('create', {
+            message: "не все поля заполнены"
+        });
+    };
+}
+
 exports.sendAdminPage = (req, res) => {
     if (req.cookies.login != null && database[1][req.cookies.login].role === 'Admin')
     {

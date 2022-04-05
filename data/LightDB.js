@@ -1,4 +1,5 @@
 let database = require('./database.json')
+let chats = require('./chats.json')
 const fs = require('fs')
 
 class User {
@@ -180,3 +181,22 @@ hash = (password) => {
     return newPass
 }
 
+
+
+
+
+module.exports.findChat = (name) => {
+    for (let chat in chats) {
+        if (name === chat) return true
+    }
+    return false
+}
+
+module.exports.saveChat = (uname, type, name, author, color) => {
+    fs.copyFile('data/chats/exampleChat.json', `data/chats/${uname}.json`, (error) => {console.log(error)})
+    console.log(chats)
+    chats[uname] = {"href": `chats/${uname}`,"type": type, "name": name, "author": author, "color": color}
+    console.log(chats)
+    fs.writeFile('data/chats.json', JSON.stringify(chats, null, 2), (error)=>{console.log(error)})
+    return true
+}

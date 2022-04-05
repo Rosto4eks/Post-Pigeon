@@ -102,13 +102,32 @@ li {
     animation-fill-mode: forwards;
     display: flex;
     font-family: 'Mulish', sans-serif;
-    font-size: 50px;
-    letter-spacing: 1px;
+    font-size: 40px;
     font-weight: 800;
     width: 100%;
 }
+.avatar {
+    display: flex;
+    margin-top: 50px;
+    margin-left: auto;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    background-color: blueviolet;
+    color: #f4f4f4;
+    border-radius: 50%;
+}
+.avatar__image {
+    margin: auto;
+    width: 60%;
+    height: 60%;
+}
 .blog__text {
-    margin: 50px auto 50px auto;
+    margin: 50px auto 50px 10px;
+    padding-left: 100px;
+    padding-right: 100px;
+    border-radius: 5px 80px 80px 80px;
+    background-color: #fafafa;
 }
 .b-1 {
     color: #2e2e2e;
@@ -118,6 +137,7 @@ li {
 .b-2 {
     color: #272727;
     margin-top: 50px;
+    margin-bottom: 50px;
     margin-left: 50px;
 }
 .redirect {
@@ -231,7 +251,11 @@ li {
         font-size: 40px;
     }
     .blog {
-        font-size: 38px;
+        font-size: 32px;
+    }
+    .blog__text {
+        padding-left: 40px;
+        padding-right: 30px;
     }
     .b-1 {
         margin-left: -30px;
@@ -254,7 +278,11 @@ li {
     }
     .blog {
         text-align: center;
-        font-size: 25px;
+        font-size: 23px;
+    }
+    .blog__text {
+        padding-left: 5px;
+        padding-right: 5px;
     }
     .b-1 {
         margin-left: 0;
