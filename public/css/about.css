@@ -148,7 +148,7 @@ li {
 .login {
     text-decoration: none;
     font-family: 'Mulish', sans-serif;
-    font-size: 50px;
+    font-size: 35px;
     letter-spacing: 3px;
     font-weight: 800;
     color: #fafafa;
@@ -163,7 +163,7 @@ li {
 .register {
     text-decoration: none;
     font-family: 'Mulish', sans-serif;
-    font-size: 50px;
+    font-size: 35px;
     letter-spacing: 3px;
     font-weight: 800;
     color: #fafafa;
@@ -181,7 +181,7 @@ li {
     color: #fafafa;
     background-color: #2a2a2a;
     font-family: 'Mulish', sans-serif;
-    font-size: 50px;
+    font-size: 32px;
     letter-spacing: 3px;
     font-weight: 800;
     text-align: center;
@@ -248,7 +248,7 @@ li {
         margin: 10px auto 20px;
     }
     .count__text {
-        font-size: 40px;
+        font-size: 32px;
     }
     .blog {
         font-size: 32px;
@@ -294,7 +294,10 @@ li {
         font-size: 35px;
     }
     .register {
-        font-size: 35px;
+        font-size: 25px;
+    }
+    .login {
+        font-size: 25px;
     }
 }
 

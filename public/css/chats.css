@@ -82,6 +82,7 @@ a {
     height: 15px;
 }
 .chat__name {
+    font-size: 20px;
     color: #ececec;
     padding: 10px 0 10px 20px;
 }

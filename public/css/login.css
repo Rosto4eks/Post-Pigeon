@@ -102,7 +102,7 @@ input {
 
 .login__button {
     font-family: 'Mulish', sans-serif;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 20px;
     border: none;
     border-radius: 15px;
@@ -128,7 +128,7 @@ input {
     display: flex;
     justify-content: space-between;
     font-family: 'Mulish', sans-serif;
-    font-weight: 800;
+    font-weight: 600;
     font-size: 18px;
     margin: 5% 20% 0 20%;
 }

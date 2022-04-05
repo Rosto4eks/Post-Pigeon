@@ -36,7 +36,7 @@ form {
 input {
     padding: 8px 20px 8px 20px;
     font-family: 'Mulish', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
 }
 .message {
@@ -55,7 +55,7 @@ input {
 .href::placeholder {
     color: #212121;
     font-family: 'Mulish', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
 }
 .href:focus {
@@ -63,7 +63,7 @@ input {
     transition: 400ms;
 }
 .name {
-    margin-top: 20px;
+    margin-top: 18px;
     background-color: #f1f1f1;
     border: none;
     border-radius: 15px;
@@ -73,7 +73,7 @@ input {
 .name::placeholder {
     color: #212121;
     font-family: 'Mulish', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
 }
 .name:focus {
@@ -83,7 +83,7 @@ input {
 .radios {
     margin: 20px auto 20px auto;
     font-family: 'Mulish', sans-serif;
-    font-size: 30px;
+    font-size: 18px;
     font-weight: 700;
     color: #e4e4e4;
 }
@@ -126,7 +126,7 @@ input {
     margin-left: 20px;
     color: #dcdcdc;
     font-family: 'Mulish', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
 }
 .button {
@@ -146,8 +146,5 @@ input {
 @media (max-width: 800px) {
     .form {
         width: 95%;
-    }
-    .radios {
-        font-size: 25px;
     }
 }
