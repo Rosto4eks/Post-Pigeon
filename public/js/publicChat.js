@@ -4,6 +4,9 @@ const socket = io(),
     input = document.querySelector('.input')
 
 let id = 0
+let i = 0
+let lastItem = document.querySelector('.aaa')
+let lastButton = document.querySelector('.aaaa')
 
 socket.on('redirect', (destination) => {
     window.location.href = destination;
@@ -42,9 +45,14 @@ socket.on('chat message', (data) => {
         })
         item.addEventListener('contextmenu', event => {
             event.preventDefault()
+            console.log(lastItem)
+            if (i > 0) lastItem.classList.remove('selected'), lastButton.style.display = 'none'
             item.classList.add('selected')
             deleteButton.value = item.lastChild.lastChild.id
             deleteButton.style.display = 'block'
+            lastItem = item
+            lastButton = deleteButton
+            return lastItem, lastButton, i++
         })
         document.addEventListener('click', event => {
             item.classList.remove('selected')
