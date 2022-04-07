@@ -3,6 +3,8 @@ const socket = io(),
     form = document.querySelector('.form'),
     input = document.querySelector('.input')
 
+let id = 0
+
 socket.on('redirect', (destination) => {
     window.location.href = destination;
 })
@@ -25,7 +27,7 @@ form.addEventListener('submit', (e) => {
         let minutes = fulldate.getMinutes()
         if (minutes < 10) {minutes = `0${minutes}`}
         const time = hours + ':' + minutes
-        socket.emit('chat message', {path: window.location.pathname, login: login, name: Name, date: date, time: time, message: input.value})
+        socket.emit('chat message', {path: window.location.pathname, login: login, id: id, name: Name, date: date, time: time, message: input.value})
         input.value = ''
     };
 });
@@ -33,15 +35,37 @@ form.addEventListener('submit', (e) => {
 socket.on('chat message', (data) => {
     const item = document.createElement('li')
     if (login === data.login) {
-        item.innerHTML = `<div class='yourBlock'><div class="message"><div class="yourName">Вы:&nbsp</div>${data.message}<div class='time'>${data.date}, ${data.time}</div></div></div>`;
+        item.innerHTML = `<button class="delete"><img class="trash" src="../images/trash.png"></button><div class='yourBlock'><div class="message" id=${data.id}><div class="yourName">Вы:&nbsp</div>${data.message}<div class='time'>${data.date}, ${data.time}</div></div></div>`;
+        let deleteButton = item.querySelector('.delete')
+        deleteButton.addEventListener('click', event => {
+            socket.emit('deleteMessage', {'href': window.location.pathname, 'id': deleteButton.value})
+        })
+        item.addEventListener('contextmenu', event => {
+            event.preventDefault()
+            item.classList.add('selected')
+            deleteButton.value = item.lastChild.lastChild.id
+            deleteButton.style.display = 'block'
+        })
+        document.addEventListener('click', event => {
+            item.classList.remove('selected')
+            deleteButton.style.display = 'none'
+        })
     }
     else if (data.login === "Admin") {
-        item.innerHTML = `<div class='block'><div class="message"><div class="admin">${data.name}:&nbsp</div>${data.message}<div class='time'>${data.date}, ${data.time}</div></div></div>`;
+        item.innerHTML = `<div class="delete">удалить</div><div class='block'><div class="message" id=${data.id}><div class="admin">${data.name}:&nbsp</div>${data.message}<div class='time'>${data.date}, ${data.time}</div></div></div>`;
     }
     else {
-        item.innerHTML = `<div class='block'><div class="message"><div class="name">${data.name}:&nbsp</div>${data.message}<div class='time'>${data.date}, ${data.time}</div></div></div>`;
+        item.innerHTML = `<div class="delete">удалить</div><div class='block'><div class="message" id=${data.id}><div class="name">${data.name}:&nbsp</div>${data.message}<div class='time'>${data.date}, ${data.time}</div></div></div>`;
     }
     messages.appendChild(item)
     messages.scrollTo(0, messages.scrollHeight)
+    id = parseInt(data.id) + 1
+})
+document.addEventListener('selectstart', event => {
+    event.preventDefault()
 })
 
+socket.on('deleteMessage', data => {
+    let element = document.getElementById(data.id)
+    element.parentElement.style.display = 'none'
+})

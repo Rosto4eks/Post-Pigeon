@@ -22,7 +22,7 @@ io.on('connection', (socket) => {
                 socket.join(data)
                 MessagesData = JSON.parse(MessagesData)
                 for (elem in MessagesData[1]) {
-                    socket.emit('chat message', {login: MessagesData[1][elem]["login"], name: MessagesData[1][elem]["name"], date: MessagesData[1][elem]["date"], time:MessagesData[1][elem]["time"] ,message: MessagesData[1][elem]["message"]});
+                    socket.emit('chat message', {login: MessagesData[1][elem]["login"], id: elem, name: MessagesData[1][elem]["name"], date: MessagesData[1][elem]["date"], time:MessagesData[1][elem]["time"] ,message: MessagesData[1][elem]["message"]});
                 }
             }
             else {
@@ -34,12 +34,19 @@ io.on('connection', (socket) => {
     socket.on('chat message', (data) => {
         let MessagesData = require(`./data${data.path}.json`)
         let id = MessagesData[0].nextID
-        MessagesData[1][id] = {"login": data.login,"name": data.name, "date": data.date, "time": data.time ,"message": data.message}
+        MessagesData[1][id] = {"login": data.login, "name": data.name, "date": data.date, "time": data.time ,"message": data.message}
         MessagesData[0]["nextID"]++
         // sasving message in databse
         fs.writeFile(`data${data.path}.json`, JSON.stringify(MessagesData, null, 2), ()=>{})
         // sending message
-        io.to(data.path).emit('chat message', {login: data.login, name: data.name, date: data.date, time: data.time ,message: data.message});
+        io.to(data.path).emit('chat message', {login: data.login, id: data.id, name: data.name, date: data.date, time: data.time ,message: data.message});
+    })
+
+    socket.on('deleteMessage', (data) => {
+        let chatData = require(`./data${data.href}.json`)
+        delete chatData[1][data.id]
+        fs.writeFile(`./data${data.href}.json`, JSON.stringify(chatData, null, 2), ()=>{})
+        io.to(data.href).emit('deleteMessage', {id: data.id})
     })
 })
 
