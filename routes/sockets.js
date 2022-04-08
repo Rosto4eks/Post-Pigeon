@@ -2,9 +2,9 @@ const fs = require('fs'),
     io = require('../app')
 
 // connecting socket 
-sockets = (socket) => {
+sockets = socket => {
     // send all messages from database
-    socket.on('join', (data) => {
+    socket.on('join', data => {
         fs.readFile(__dirname.slice(0, -7) + `/data${data}.json`, (error,  MessagesData) => {
             if (error === null) {
                 socket.join(data)
@@ -21,7 +21,7 @@ sockets = (socket) => {
     })
 
     // get message and send to all 
-    socket.on('chat message', (data) => {
+    socket.on('chat message', data => {
         let MessagesData = require(`../data${data.path}.json`)
         let id = data.id
         MessagesData[id] = {"login": data.login, "name": data.name, "date": data.date, "time": data.time ,"message": data.message}
@@ -32,12 +32,21 @@ sockets = (socket) => {
     })
 
     // delete message from database
-    socket.on('deleteMessage', (data) => {
+    socket.on('deleteMessage', data => {
         let MessagesData = require(`../data${data.href}.json`)
         // delete message
         delete MessagesData[data.id]
         fs.writeFile(`./data${data.href}.json`, JSON.stringify(MessagesData, null, 2), ()=>{})
         io.to(data.href).emit('deleteMessage', {id: data.id})
+    })
+
+    socket.on('typing', data => {
+        if (data.typing === true) {
+            socket.broadcast.to(data.href).emit('typing', {typing: true, login: data.login})
+        }
+        else if (data.typing === false) {
+            socket.broadcast.to(data.href).emit('typing', {typing: false, login: data.login})
+        }
     })
 }
 
