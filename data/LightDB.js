@@ -27,7 +27,7 @@ class User {
             console.log('user already exist')
             return false
         }
-        // if the user exists, add himr to the database
+        // if the user exists, add him to the database
         else {
             this.id = database[0].nextID
             database[1][this.login] = {"id": this.id,"name": this.name, "password": hash(this.password), "role": this.role}
@@ -193,6 +193,7 @@ module.exports.findChat = (name) => {
 }
 
 module.exports.saveChat = (uname, type, name, author, color) => {
+    //uname - unique name /type private/public
     fs.copyFile('data/chats/exampleChat.json', `data/chats/${uname}.json`, (error) => {console.log(error)})
     console.log(chats)
     chats[uname] = {"href": `chats/${uname}`,"type": type, "name": name, "author": author, "color": color}

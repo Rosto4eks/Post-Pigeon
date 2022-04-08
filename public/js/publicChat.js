@@ -40,15 +40,15 @@ socket.on('chat message', (data) => {
     if (login === data.login) {
         item.innerHTML = `<button class="delete"><img class="trash" src="../images/trash.png"></button><div class='yourBlock'><div class="message" id=${data.id}><div class="yourName">Вы:&nbsp</div>${data.message}<div class='time'>${data.date}, ${data.time}</div></div></div>`;
         let deleteButton = item.querySelector('.delete')
+        console.log(deleteButton)
         deleteButton.addEventListener('click', event => {
-            socket.emit('deleteMessage', {'href': window.location.pathname, 'id': deleteButton.value})
+            console.log(1)
+            socket.emit('deleteMessage', {'href': window.location.pathname, 'id': item.lastChild.lastChild.id})
         })
         item.addEventListener('contextmenu', event => {
             event.preventDefault()
-            console.log(lastItem)
             if (i > 0) lastItem.classList.remove('selected'), lastButton.style.display = 'none'
             item.classList.add('selected')
-            deleteButton.value = item.lastChild.lastChild.id
             deleteButton.style.display = 'block'
             lastItem = item
             lastButton = deleteButton

@@ -26,5 +26,12 @@
     "name": "База Ростка",
     "author": "JohnyDepp",
     "color": "#b89f25"
+  },
+  "rofloLAND": {
+    "href": "chats/rofloLAND",
+    "type": "public",
+    "name": "Рофляндия",
+    "author": "Admin",
+    "color": "#e326ca"
   }
 }
