@@ -1,6 +1,6 @@
 [
   {
-    "nextID": 6
+    "nextID": 9
   },
   {
     "Admin": {
@@ -37,6 +37,24 @@
       "id": 5,
       "name": "Джонни Депп",
       "password": "bDXIOS6ElagPA",
+      "role": "User"
+    },
+    "alex": {
+      "id": 6,
+      "name": "alex",
+      "password": "CMbaCLgJVQ",
+      "role": "User"
+    },
+    "felix": {
+      "id": 7,
+      "name": "felix",
+      "password": "1FCjkarp8SHG",
+      "role": "User"
+    },
+    "jane": {
+      "id": 8,
+      "name": "jane",
+      "password": "bxc2FCgJVQ",
       "role": "User"
     }
   }

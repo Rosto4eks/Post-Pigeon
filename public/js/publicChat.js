@@ -2,7 +2,11 @@ const socket = io(),
     messages = document.querySelector('.messages'),
     form = document.querySelector('.form'),
     input = document.querySelector('.input'),
-    typing = document.querySelector('.typing')
+    typing = document.querySelector('.typing'),
+    menuButton = document.querySelector('.menu__button'),
+    menu = document.querySelector('.menu'),
+    change = document.querySelector('.change__button'),
+    delete__button = document.querySelector('.delete__button')
 
 let id = 0,
     last = 0,
@@ -58,7 +62,7 @@ socket.on('chat message', (data) => {
         let deleteButton = item.querySelector('.delete')
         let context = item.querySelector('.context')
         deleteButton.addEventListener('click', event => {
-            socket.emit('deleteMessage', {'href': window.location.pathname, 'id': item.lastChild.lastChild.id})
+            socket.emit('deleteMessage', {'path': window.location.pathname, 'id': item.lastChild.lastChild.id})
         })
         context.addEventListener('contextmenu', event => {
             event.preventDefault()
@@ -93,15 +97,48 @@ let usersTyping = []
 socket.on('typing', data => {
     if (data.typing === true) {
         usersTyping.push(data.login)
-        typing.innerHTML = usersTyping + ' пишет...'
-        typing.style.transform = 'translateY(-60px)'
+        if (usersTyping.length > 1 && usersTyping.length < 3) {
+            typing.innerHTML = usersTyping + ' пишут...'
+        }
+        else if (usersTyping.length > 2) {
+            typing.innerHTML = usersTyping.length + ' человека пишут...'
+        }
+        else {
+            typing.innerHTML = usersTyping + ' пишет...'
+            typing.style.transform = 'translateY(-55px)'
+        }
     }
     if (data.typing === false && usersTyping.length > 0) {
         usersTyping.pop(data.login)
-        typing.innerHTML = usersTyping + ' пишет...'
+        if (usersTyping.length > 1 && usersTyping.length < 3) {
+            typing.innerHTML = usersTyping + ' пишут...'
+        }
+        else if (usersTyping.length > 2) {
+            typing.innerHTML = usersTyping.length + ' человека пишут...'
+        }
+        else {
+            typing.innerHTML = usersTyping + ' пишет...'
+        }
+
     }
     if (data.typing === false && usersTyping.length < 1) {
-        typing.style.transform = 'translateY(60px)'
+        typing.style.transform = 'translateY(55px)'
 
+    }
+})
+let menuSwitch = 0
+menuButton.addEventListener('click', event => {
+    if (menuSwitch === 0) {
+        menuSwitch = 1
+        return menu.style.transform = 'translateY(55px)'
+    }
+    if (menuSwitch === 1) {
+        menuSwitch = 0
+        return menu.style.transform = 'translateY(-25px)'
+    }
+})
+delete__button.addEventListener('click', event => {
+    if (confirm('удалить чат?') === true) {
+        socket.emit('deleteChat', {path: window.location.pathname})
     }
 })

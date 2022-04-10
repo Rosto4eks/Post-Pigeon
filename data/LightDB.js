@@ -180,9 +180,19 @@ hash = (password) => {
     }
     return newPass
 }
-
-
-
+randomInteger = (min, max) => {
+    let rand = min - 0.5 + Math.random() * (max - min + 1);
+    return Math.round(rand);
+}
+  
+module.exports.path = () => {
+    let newPass= ''
+    const symbols = 'mw3HQWGikeFaxCrcLoDUzXdEKslMjBbq4NhfI1pgA8PYyZ67Ru0TtnO2JS5Vv9'
+    for (let counter = 0; counter <= randomInteger(12, 20); counter++) {
+        newPass += symbols[randomInteger(0, symbols.length)]
+    }
+    return newPass
+}
 
 
 module.exports.findChat = (name) => {
@@ -194,10 +204,8 @@ module.exports.findChat = (name) => {
 
 module.exports.saveChat = (uname, type, name, author, color) => {
     //uname - unique name /type private/public
-    fs.copyFile('data/chats/exampleChat.json', `data/chats/${uname}.json`, (error) => {console.log(error)})
-    console.log(chats)
+    fs.copyFile('data/chats/exampleChat.json', `data/chats/${uname}.json`, () => {})
     chats[uname] = {"href": `chats/${uname}`,"type": type, "name": name, "author": author, "color": color}
-    console.log(chats)
-    fs.writeFile('data/chats.json', JSON.stringify(chats, null, 2), (error)=>{console.log(error)})
+    fs.writeFile('data/chats.json', JSON.stringify(chats, null, 2), ()=>{})
     return true
 }

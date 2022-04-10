@@ -33,11 +33,19 @@ sockets = socket => {
 
     // delete message from database
     socket.on('deleteMessage', data => {
-        let MessagesData = require(`../data${data.href}.json`)
+        let MessagesData = require(`../data${data.path}.json`)
         // delete message
         delete MessagesData[data.id]
-        fs.writeFile(`./data${data.href}.json`, JSON.stringify(MessagesData, null, 2), ()=>{})
-        io.to(data.href).emit('deleteMessage', {id: data.id})
+        fs.writeFile(`./data${data.path}.json`, JSON.stringify(MessagesData, null, 2), ()=>{})
+        io.to(data.path).emit('deleteMessage', {id: data.id})
+    })
+
+    socket.on('deleteChat', data => {
+        io.to(data.path).emit('redirect', '/chats')
+        let chats = require(`../data/chats.json`)
+        delete chats[data.path.slice(7)]
+        fs.writeFile(`./data/chats.json`, JSON.stringify(chats, null, 2), ()=>{})
+        fs.unlink(`./data${data.path}.json`, ()=>{})
     })
 
     socket.on('typing', data => {

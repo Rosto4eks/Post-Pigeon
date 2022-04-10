@@ -106,7 +106,7 @@ input {
 .r label:hover {
     border: none;
     color: #2a2a2a;
-    background-color: #d0ffb7;
+    background-color: #ededed;
     transition: 400ms;
 }
 .colors {

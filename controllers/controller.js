@@ -206,7 +206,15 @@ exports.sendChatPage = (req, res) => {
         // if chat public
         if (chats[req.params["chatName"]] != undefined) {
             // check type of chat
-            if(chats[req.params["chatName"]].type != "private") {
+            if(chats[req.params["chatName"]].type != "private" && req.cookies.login === chats[req.params["chatName"]].author) {
+                res.render('chat', {
+                    name: chats[req.params["chatName"]].name,
+                    author: true,
+                    public: true,
+                    js: "/js/publicChat.js"
+                })
+            }
+            else if(chats[req.params["chatName"]].type != "private") {
                 res.render('chat', {
                     name: chats[req.params["chatName"]].name,
                     public: true,
@@ -217,6 +225,7 @@ exports.sendChatPage = (req, res) => {
             else if (chats[req.params["chatName"]].type === "private" && req.cookies.login === chats[req.params["chatName"]].author) {
                 res.render('chat', {
                     name: chats[req.params["chatName"]].name,
+                    author: true,
                     public: true,
                     js: "/js/publicChat.js"
                 })
@@ -270,21 +279,21 @@ exports.sendCreatePage = (req, res) => {
 // POSt /create
 exports.create = (req, res) => {
     // check if all fields are filled
-    if (req.body.href && req.body.name && req.body.radio && req.body.color) {
-        const href = req.body.href
+    if (req.body.name && req.body.radio && req.body.color) {
         const name = req.body.name
         const radio = req.body.radio
         const color = req.body.color
+        const path = LightDB.path()
 
         // if chat with this login doesn't exist
-        if (LightDB.findChat(href) === false) {
-            if (LightDB.saveChat(href, radio, name, req.cookies.login, color) === true) {
-                res.redirect(`/chats/${href}`)
+        if (LightDB.findChat(path) === false) {
+            if (LightDB.saveChat(path, radio, name, req.cookies.login, color) === true) {
+                res.redirect(`/chats/${path}`)
             }
         }
         // if exist
         else {
-            es.render('create', {
+            res.render('create', {
                 message: "такой чат уже существует"
             }); 
         }

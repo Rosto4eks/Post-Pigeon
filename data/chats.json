@@ -13,25 +13,18 @@
     "author": "Admin",
     "color": "#a612c7"
   },
-  "test": {
-    "href": "/chats/test",
-    "type": "private",
-    "name": "Тестовый чат",
-    "author": "Admin",
-    "color": "#5793cf"
-  },
-  "Rosto4ekzy": {
-    "href": "chats/Rosto4ekzy",
-    "type": "private",
-    "name": "База Ростка",
-    "author": "JohnyDepp",
-    "color": "#b89f25"
-  },
-  "rofloLAND": {
-    "href": "chats/rofloLAND",
+  "wCm6PAmwQfHfp51Wk": {
+    "href": "chats/wCm6PAmwQfHfp51Wk",
     "type": "public",
-    "name": "Рофляндия",
+    "name": "Soligorsk",
     "author": "Admin",
-    "color": "#e326ca"
+    "color": "#ffffff"
+  },
+  "dn3wundefinedQm3IUORgT17": {
+    "href": "chats/dn3wundefinedQm3IUORgT17",
+    "type": "public",
+    "name": "База Ростка",
+    "author": "Rosto4ek",
+    "color": "#e89b35"
   }
 }

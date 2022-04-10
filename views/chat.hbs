@@ -17,7 +17,17 @@
         <div class="header">
             <a href="/chats" class="back"></a>
             <div class="chat__name"><div class="chat__name__text">{{name}}</div></div>
+            {{#if author}}
+                <a class="menu__button"><img class="menu__image" src="/images/menu.png"></img></a>
+            {{/if}}
         </div>
+
+        {{#if author}}
+           <div class="menu">
+               <button class="change__button">изменить</button>
+               <button class="delete__button">удалить</button>
+           </div>
+        {{/if}}
 
         <ul class="messages">
         </ul>
