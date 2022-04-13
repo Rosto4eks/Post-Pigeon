@@ -276,14 +276,14 @@ exports.sendCreatePage = (req, res) => {
     }
 }
 
-// POSt /create
+// POST /create
 exports.create = (req, res) => {
     // check if all fields are filled
     if (req.body.name && req.body.radio && req.body.color) {
         const name = req.body.name
         const radio = req.body.radio
         const color = req.body.color
-        const path = LightDB.path()
+        const path = LightDB.path(12, 20)
 
         // if chat with this login doesn't exist
         if (LightDB.findChat(path) === false) {

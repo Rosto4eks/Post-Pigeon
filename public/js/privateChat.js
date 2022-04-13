@@ -18,13 +18,20 @@ login = getCookie("login")
 socket.on('chat message', (data) => {
     const item = document.createElement('li')
     if (login === data.login) {
-        item.innerHTML = `<div class='yourBlock'><div class="message" id=${data.id}><div class="yourName">Вы:&nbsp</div>${data.message}<div class='time'>${data.date}, ${data.time}</div></div></div>`;
-    }
-    else if (data.login === "Admin") {
-        item.innerHTML = `<div class='block'><div class="message" id=${data.id}><div class="admin">${data.name}:&nbsp</div>${data.message}<div class='time'>${data.date}, ${data.time}</div></div></div>`;
+        if (data.filename) {
+            item.innerHTML = `<div class='yourBlock'><div class="message" id=${data.id}><div class="yourName">Вы:&nbsp</div>${data.message}<img class="upload__image" src='../uploads/${data.path.slice(7)}/${data.filename}.${data.type}'><div class='time'>${data.date}, ${data.time}</div></div></div>`;
+        }
+        else {
+            item.innerHTML = `<div class='yourBlock'><div class="message" id=${data.id}><div class="yourName">Вы:&nbsp</div>${data.message}<div class='time'>${data.date}, ${data.time}</div></div></div>`;
+        }
     }
     else {
-        item.innerHTML = `<div class='block'><div class="message" id=${data.id}><div class="name">${data.name}:&nbsp</div>${data.message}<div class='time'>${data.date}, ${data.time}</div></div></div>`;
+        if (data.filename) {
+            item.innerHTML = `<div class='block'><div class="message" id=${data.id}><div class="name">${data.name}:&nbsp</div>${data.message}<img class="upload__image" src='../uploads/${data.path.slice(7)}/${data.filename}.${data.type}'><div class='time'>${data.date}, ${data.time}</div></div></div>`;
+        }
+        else {
+            item.innerHTML = `<div class='block'><div class="message" id=${data.id}><div class="name">${data.name}:&nbsp</div>${data.message}<div class='time'>${data.date}, ${data.time}</div></div></div>`;
+        }
     }
     messages.appendChild(item)
     messages.scrollTo(0, messages.scrollHeight)

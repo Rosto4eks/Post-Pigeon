@@ -10,9 +10,6 @@ li {
     animation: show 0.8s 1;
     display: flex;
 }
-input {
-    padding-left: 30px;
-}
 
 .content {
     background-color: #2c2c2c;
@@ -55,7 +52,7 @@ input {
 .menu {
     letter-spacing: 2px;
     transition: 400ms;
-    transform: translateY(-25px);
+    transform: translateY(-30px);
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -79,6 +76,7 @@ input {
     transition: 400ms;
     background-color: #212121;
     padding: 10px 20px 10px 20px;
+    border-radius: 0 0 0 15px;
     color:#ce4c4c;
 }
 .change__button {
@@ -105,7 +103,32 @@ input {
     margin: 8px 100px 8px 100px;
     height: 40px;
 }
+.flex__file {
+    width: 5%; 
+    margin: auto;
+}
+.file__label {
+    rotate: 0deg;
+    transition: 400ms;
+    background-image: url(../images/file.png);
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    margin: auto;
+    width: 40px;
+    height: 40px;
+    border: 3px dashed #212121;
+    border-right: none;
+    border-left: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+input[type = file] {
+    display: none;
+}
 .input {
+    margin-left: 30px;
     font-family: 'Mulish', sans-serif;
     font-weight: 600;
     font-size: 18px;
@@ -117,6 +140,7 @@ input {
     border-radius: 30px 0 0 30px;
     width: 90%;
     transition: 200ms;
+    padding-left: 30px;
 }
 .input::placeholder {
     color: #fdfdfd;
@@ -134,7 +158,8 @@ input {
     background-repeat: no-repeat;
     background-position: center;
     margin-left: 3%;
-    width: 40px;
+    min-width: 40px;
+    width: 5%;
     transition: 100ms;
 }
 .button:active {
@@ -201,6 +226,8 @@ input {
     color: #c12525; 
 }
 .message {
+    display: flex;
+    flex-direction: column;
     word-break: break-word;
 }
 .time {
@@ -241,6 +268,12 @@ input {
     font-weight: 400;
     position: absolute;
     transition: 200ms;
+}
+.upload__image {
+    margin: 10px auto 10px auto;
+    border-radius: 40px;
+    max-height: 800px;
+    width: 100%;
 }
 
 @media (max-width: 1000px) {

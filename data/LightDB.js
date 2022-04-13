@@ -2,6 +2,10 @@ let database = require('./database.json')
 let chats = require('./chats.json')
 const fs = require('fs')
 
+callback = error => {
+    if (error) console.log(error)
+}
+
 class User {
 
     constructor(login, name, password, role) {
@@ -11,15 +15,6 @@ class User {
         this.role = role
     };
 
-    // user search function
-    find() {
-        for (let element in database[1]) {
-            if (this.login === element) {
-                return true
-            }
-        }
-        return false
-    }
     // user save function
     save() {
         // checking if the user exists in the database
@@ -32,50 +27,10 @@ class User {
             this.id = database[0].nextID
             database[1][this.login] = {"id": this.id,"name": this.name, "password": hash(this.password), "role": this.role}
             database[0]["nextID"]++
-            fs.writeFile('data/database.json', JSON.stringify(database, null, 2), ()=>{})
+            fs.writeFile('data/database.json', JSON.stringify(database, null, 2), callback)
             return true
         }
     }
-    // delete user function
-    delete() {
-        // checking if the user exists in the database
-        if (this.find() === true) {
-            delete database[1][this.login]
-            fs.writeFile('data/database.json', JSON.stringify(database, null, 2), ()=>{})
-            return true
-        }
-        else {
-            console.log('not found')
-            return false
-        }
-    }
-    // user change name/password/role function
-    change( property, newValue ) {
-        if (this.find() === true) {
-            switch( property ) {
-                case "name":
-                    database[1][this.login].name = newValue;
-                    fs.writeFile('data/database.json', JSON.stringify(database, null, 2), ()=>{})
-                    return true
-                case "password":
-                    database[1][this.login].password = hash(newValue);
-                    fs.writeFileSync('data/database.json', JSON.stringify(database, null, 2), ()=>{})
-                    return true
-                case "role":
-                    database[1][this.login].role = newValue;
-                    fs.writeFileSync('data/database.json', JSON.stringify(database, null, 2), ()=>{})
-                    return true
-                default: 
-                    console.log('property does not exist, value must be = name/password/role')
-                   return false
-            }
-        }
-        else {
-            console.log('not found')
-            return false
-        }
-    }
-
 }
 
 module.exports.User = User
@@ -92,7 +47,7 @@ module.exports.findUser = (login) => {
 module.exports.deleteUser = (login) => {
     if (findUser(login) === true) {
         delete database[1][login]
-        fs.writeFile('data/database.json', JSON.stringify(database, null, 2), ()=>{})
+        fs.writeFile('data/database.json', JSON.stringify(database, null, 2), callback)
         return true
     }
     else {
@@ -106,15 +61,15 @@ module.exports.changeUser = (login, property, newValue) => {
         switch( property ) {
             case "name":
                 database[1][login].name = newValue
-                fs.writeFile('data/database.json', JSON.stringify(database, null, 2), ()=>{})
+                fs.writeFile('data/database.json', JSON.stringify(database, null, 2), callback)
                 return true
             case "password":
                 database[1][login].password = hash(newValue);
-                fs.writeFile('data/database.json', JSON.stringify(database, null, 2), ()=>{});
+                fs.writeFile('data/database.json', JSON.stringify(database, null, 2), callback);
                 return true
             case "role":
                 database[1][login].role = newValue;
-                fs.writeFile('data/database.json', JSON.stringify(database, null, 2), ()=>{});
+                fs.writeFile('data/database.json', JSON.stringify(database, null, 2), callback);
                 return true
             default: 
                 console.log('error')
@@ -146,6 +101,32 @@ module.exports.getCount = () => {
         count++
     }
     return count
+}
+  
+module.exports.path = (min, max) => {
+    let newPass= ''
+    const symbols = 'mw3HQWGikeFaxCrcLoDUzXdEKslMjBbq4NhfI1pgA8PYyZ67Ru0TtnO2JS5Vv9'
+    for (let counter = 0; counter <= randomInteger(min, max); counter++) {
+        newPass += symbols[randomInteger(0, symbols.length)]
+    }
+    return newPass
+}
+
+
+module.exports.findChat = (name) => {
+    for (let chat in chats) {
+        if (name === chat) return true
+    }
+    return false
+}
+
+module.exports.saveChat = (uname, type, name, author, color) => {
+    //uname - unique name /type private/public
+    fs.copyFile('data/chats/exampleChat.json', `data/chats/${uname}.json`, callback)
+    chats[uname] = {"href": `chats/${uname}`,"type": type, "name": name, "author": author, "color": color}
+    fs.writeFile('data/chats.json', JSON.stringify(chats, null, 2), callback)
+    fs.mkdir(`uploads/${uname}`, callback)
+    return true
 }
 
 hash = (password) => {
@@ -180,32 +161,8 @@ hash = (password) => {
     }
     return newPass
 }
+
 randomInteger = (min, max) => {
     let rand = min - 0.5 + Math.random() * (max - min + 1);
     return Math.round(rand);
-}
-  
-module.exports.path = () => {
-    let newPass= ''
-    const symbols = 'mw3HQWGikeFaxCrcLoDUzXdEKslMjBbq4NhfI1pgA8PYyZ67Ru0TtnO2JS5Vv9'
-    for (let counter = 0; counter <= randomInteger(12, 20); counter++) {
-        newPass += symbols[randomInteger(0, symbols.length)]
-    }
-    return newPass
-}
-
-
-module.exports.findChat = (name) => {
-    for (let chat in chats) {
-        if (name === chat) return true
-    }
-    return false
-}
-
-module.exports.saveChat = (uname, type, name, author, color) => {
-    //uname - unique name /type private/public
-    fs.copyFile('data/chats/exampleChat.json', `data/chats/${uname}.json`, () => {})
-    chats[uname] = {"href": `chats/${uname}`,"type": type, "name": name, "author": author, "color": color}
-    fs.writeFile('data/chats.json', JSON.stringify(chats, null, 2), ()=>{})
-    return true
 }

@@ -5,8 +5,10 @@ const socket = io(),
     typing = document.querySelector('.typing'),
     menuButton = document.querySelector('.menu__button'),
     menu = document.querySelector('.menu'),
-    change = document.querySelector('.change__button'),
-    delete__button = document.querySelector('.delete__button')
+    change__button = document.querySelector('.change__button'),
+    delete__button = document.querySelector('.delete__button'),
+    file = document.querySelector('.file'),
+    fileLabel = document.querySelector('.file__label')
 
 let id = 0,
     last = 0,
@@ -40,7 +42,7 @@ function getCookie(name) {
 
 form.addEventListener('submit', (event) => {
     event.preventDefault()
-    if (input.value) {
+    if (input.value || file.value) {
         const fulldate = new Date()
         const date = fulldate.toLocaleDateString()
         let hours = fulldate.getHours()
@@ -48,17 +50,32 @@ form.addEventListener('submit', (event) => {
         let minutes = fulldate.getMinutes()
         if (minutes < 10) {minutes = `0${minutes}`}
         const time = hours + ':' + minutes
-        socket.emit('chat message', {path: window.location.pathname, login: login, id: id, name: Name, date: date, time: time, message: input.value})
+        if (file.value) {
+            socket.emit('chat message', {path: window.location.pathname, login: login, id: id, name: Name, date: date, time: time, message: input.value, file: file.files[0], type: file.value.match(/\.([^.]+)$/)[1]})
+        }
+        else {
+            socket.emit('chat message', {path: window.location.pathname, login: login, id: id, name: Name, date: date, time: time, message: input.value})
+        }
+       
         input.value = ''
+        file.value = ''
+        fileLabel.style.transform = 'rotate(0deg)'
+        fileLabel.style.borderColor = '#212121'
         inputSwitch = 0
         socket.emit('typing', {href: window.location.pathname, typing: false})
     };
 });
 
 socket.on('chat message', (data) => {
+    console.log(data)
     const item = document.createElement('li')
     if (login === data.login) {
-        item.innerHTML = `<div class="context"><button class="delete"><img class="trash" src="../images/trash.png"></button></div><div class='yourBlock'><div class="message" id=${data.id}><div class="yourName">Вы:&nbsp</div>${data.message}<div class='time'>${data.date}, ${data.time}</div></div></div>`;
+        if (data.filename) {
+            item.innerHTML = `<div class="context"><button class="delete"><img class="trash" src="../images/trash.png"></button></div><div class='yourBlock'><div class="message" id=${data.id}><div class="yourName">Вы:&nbsp</div>${data.message}<img class="upload__image" src='../uploads/${data.path.slice(7)}/${data.filename}.${data.type}'><div class='time'>${data.date}, ${data.time}</div></div></div>`;
+        }
+        else {
+            item.innerHTML = `<div class="context"><button class="delete"><img class="trash" src="../images/trash.png"></button></div><div class='yourBlock'><div class="message" id=${data.id}><div class="yourName">Вы:&nbsp</div>${data.message}<div class='time'>${data.date}, ${data.time}</div></div></div>`;
+        }
         let deleteButton = item.querySelector('.delete')
         let context = item.querySelector('.context')
         deleteButton.addEventListener('click', event => {
@@ -78,21 +95,19 @@ socket.on('chat message', (data) => {
             deleteButton.style.display = 'none'
         })
     }
-    else if (data.login === "Admin") {
-        item.innerHTML = `<div class="delete">удалить</div><div class='block'><div class="message" id=${data.id}><div class="admin">${data.name}:&nbsp</div>${data.message}<div class='time'>${data.date}, ${data.time}</div></div></div>`;
-    }
     else {
-        item.innerHTML = `<div class="delete">удалить</div><div class='block'><div class="message" id=${data.id}><div class="name">${data.name}:&nbsp</div>${data.message}<div class='time'>${data.date}, ${data.time}</div></div></div>`;
+        if (data.filename) {
+            item.innerHTML = `<div class="context"><div class='block'><div class="message" id=${data.id}><div class="name">${data.name}:&nbsp</div>${data.message}<img class="upload__image" src='../uploads/${data.path.slice(7)}/${data.filename}.${data.type}'><div class='time'>${data.date}, ${data.time}</div></div></div>`;
+        }
+        else {
+            item.innerHTML = `<div class="context"><div class='block'><div class="message" id=${data.id}><div class="name">${data.name}:&nbsp</div>${data.message}<div class='time'>${data.date}, ${data.time}</div></div></div>`;
+        }
     }
     messages.appendChild(item)
     messages.scrollTo(0, messages.scrollHeight)
     id = parseInt(data.id) + 1
 })
 
-socket.on('deleteMessage', data => {
-    let element = document.getElementById(data.id)
-    element.parentElement.style.display = 'none'
-})
 let usersTyping = []
 socket.on('typing', data => {
     if (data.typing === true) {
@@ -126,19 +141,38 @@ socket.on('typing', data => {
 
     }
 })
-let menuSwitch = 0
-menuButton.addEventListener('click', event => {
-    if (menuSwitch === 0) {
-        menuSwitch = 1
-        return menu.style.transform = 'translateY(55px)'
-    }
-    if (menuSwitch === 1) {
-        menuSwitch = 0
-        return menu.style.transform = 'translateY(-25px)'
-    }
+
+if (menuButton) {
+    let menuSwitch = 0
+
+    menuButton.addEventListener('click', event => {
+        if (menuSwitch === 0) {
+            menuSwitch = 1
+            return menu.style.transform = 'translateY(55px)'
+        }
+        if (menuSwitch === 1) {
+            menuSwitch = 0
+            return menu.style.transform = 'translateY(-30px)'
+        }
+    })
+    delete__button.addEventListener('click', event => {
+        if (confirm('удалить чат?') === true) {
+            socket.emit('deleteChat', {path: window.location.pathname})
+        }
+    })
+    change__button.addEventListener('click', event => {
+        alert('скоро появится')
+    })
+}
+
+
+socket.on('deleteMessage', data => {
+    let element = document.getElementById(data.id)
+    element.parentElement.style.display = 'none'
 })
-delete__button.addEventListener('click', event => {
-    if (confirm('удалить чат?') === true) {
-        socket.emit('deleteChat', {path: window.location.pathname})
-    }
+
+
+file.addEventListener('input', event => {
+    fileLabel.style.transform = 'rotate(315deg)'
+    fileLabel.style.borderColor = '#9deb9d'
 })

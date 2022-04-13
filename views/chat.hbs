@@ -31,10 +31,15 @@
 
         <ul class="messages">
         </ul>
-
+        
         <div class="footer">
             {{#if public}}
             <form class="form">
+                <div class="flex__file">
+                    <label class="file__label">
+                       <input type="file" class="file" id="file">
+                    </label>
+                </div>
                 <input type="text" class="input" autocomplete="off" placeholder="Сообщение">
                 <button class="button"></button>
             </form>

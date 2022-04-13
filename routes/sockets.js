@@ -1,6 +1,10 @@
 const fs = require('fs'),
-    io = require('../app')
+    io = require('../app'),
+    lightDB = require('../data/LightDB')
 
+callback = error => {
+    if (error) console.log(error)
+}
 // connecting socket 
 sockets = socket => {
     // send all messages from database
@@ -10,7 +14,12 @@ sockets = socket => {
                 socket.join(data)
                 MessagesData = JSON.parse(MessagesData)
                 for (elem in MessagesData) {
-                    socket.emit('chat message', {login: MessagesData[elem]["login"], id: elem, name: MessagesData[elem]["name"], date: MessagesData[elem]["date"], time:MessagesData[elem]["time"] ,message: MessagesData[elem]["message"]});
+                    if (MessagesData[elem]["filename"]) {
+                        socket.emit('chat message', {login: MessagesData[elem]["login"], id: elem, name: MessagesData[elem]["name"], date: MessagesData[elem]["date"], time:MessagesData[elem]["time"] ,message: MessagesData[elem]["message"], path: data, filename: MessagesData[elem]["filename"], type: MessagesData[elem]["type"]});
+                    }
+                    else {
+                        socket.emit('chat message', {login: MessagesData[elem]["login"], id: elem, name: MessagesData[elem]["name"], date: MessagesData[elem]["date"], time:MessagesData[elem]["time"] ,message: MessagesData[elem]["message"]});
+                    }
                 }
             }
             else {
@@ -24,11 +33,20 @@ sockets = socket => {
     socket.on('chat message', data => {
         let MessagesData = require(`../data${data.path}.json`)
         let id = data.id
-        MessagesData[id] = {"login": data.login, "name": data.name, "date": data.date, "time": data.time ,"message": data.message}
-        // sasving message in databse
-        fs.writeFile(`./data${data.path}.json`, JSON.stringify(MessagesData, null, 2), ()=>{})
         // sending message
-        io.to(data.path).emit('chat message', {login: data.login, id: data.id, name: data.name, date: data.date, time: data.time ,message: data.message});
+        if (data.file) {
+            let buff = Buffer.from(data.file)
+            let filename = lightDB.path(28, 32)
+            MessagesData[id] = {"login": data.login, "name": data.name, "date": data.date, "time": data.time ,"message": data.message, filename: filename, type: data.type}
+            fs.writeFile(`./data${data.path}.json`, JSON.stringify(MessagesData, null, 2), callback)
+            fs.writeFile(`./public/uploads/${(data.path).slice(7)}/${filename}.${data.type}`, buff, callback)
+            io.to(data.path).emit('chat message', {login: data.login, id: data.id, name: data.name, date: data.date, time: data.time ,message: data.message, path: data.path, filename: filename, type: data.type});
+        }
+        else {
+            MessagesData[id] = {"login": data.login, "name": data.name, "date": data.date, "time": data.time ,"message": data.message}
+            fs.writeFile(`./data${data.path}.json`, JSON.stringify(MessagesData, null, 2), callback)
+            io.to(data.path).emit('chat message', {login: data.login, id: data.id, name: data.name, date: data.date, time: data.time ,message: data.message});
+        }
     })
 
     // delete message from database
@@ -36,7 +54,7 @@ sockets = socket => {
         let MessagesData = require(`../data${data.path}.json`)
         // delete message
         delete MessagesData[data.id]
-        fs.writeFile(`./data${data.path}.json`, JSON.stringify(MessagesData, null, 2), ()=>{})
+        fs.writeFile(`./data${data.path}.json`, JSON.stringify(MessagesData, null, 2), callback)
         io.to(data.path).emit('deleteMessage', {id: data.id})
     })
 
@@ -44,8 +62,9 @@ sockets = socket => {
         io.to(data.path).emit('redirect', '/chats')
         let chats = require(`../data/chats.json`)
         delete chats[data.path.slice(7)]
-        fs.writeFile(`./data/chats.json`, JSON.stringify(chats, null, 2), ()=>{})
-        fs.unlink(`./data${data.path}.json`, ()=>{})
+        fs.writeFile(`./data/chats.json`, JSON.stringify(chats, null, 2), callback)
+        fs.unlink(`./data${data.path}.json`, callback)
+        fs.rmSync(`.public/uploads/${data.path.slice(7)}`, { recursive: true, force: true })
     })
 
     socket.on('typing', data => {
@@ -56,6 +75,7 @@ sockets = socket => {
             socket.broadcast.to(data.href).emit('typing', {typing: false, login: data.login})
         }
     })
+
 }
 
 module.exports = sockets

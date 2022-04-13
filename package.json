@@ -3,8 +3,8 @@
   "version": "1.8.0",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon app.js",
-    "start": "node app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "author": "Rosto4eks",
   "license": "ISC",

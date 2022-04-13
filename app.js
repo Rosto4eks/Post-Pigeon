@@ -3,9 +3,10 @@ const express = require('express'),
     router = require('./routes/router'),
     http = require('http').createServer(server),
     cookieParser = require('cookie-parser'),
-    io = require('socket.io')(http),
+    io = require('socket.io')(http, { maxHttpBufferSize: 1e8}),
     expressHbs = require('express-handlebars'),
     hbs = require('hbs')
+    
 
 module.exports = io
 const sockets = require('./routes/sockets')
