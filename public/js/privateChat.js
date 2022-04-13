@@ -19,15 +19,29 @@ socket.on('chat message', (data) => {
     const item = document.createElement('li')
     if (login === data.login) {
         if (data.filename) {
-            item.innerHTML = `<div class='yourBlock'><div class="message" id=${data.id}><div class="yourName">Вы:&nbsp</div>${data.message}<img class="upload__image" src='../uploads/${data.path.slice(7)}/${data.filename}.${data.type}'><div class='time'>${data.date}, ${data.time}</div></div></div>`;
+            if (data.type === 'jpg' || data.type ==='png' || data.type ==='jpeg') {
+                filetype = 'img'
+            }
+            else if (data.type === 'mp4' || data.type === 'avi' || data.type ==='mkv')
+            {
+                filetype = 'video'
+            }
+            item.innerHTML = `<div class='yourBlock'><div class="message" id=${data.id}>${data.message}<${filetype} class="upload__image" src='../uploads/${data.path.slice(7)}/${data.filename}.${data.type}'><div class='time'>${data.date}, ${data.time}</div></div></div>`;
         }
         else {
-            item.innerHTML = `<div class='yourBlock'><div class="message" id=${data.id}><div class="yourName">Вы:&nbsp</div>${data.message}<div class='time'>${data.date}, ${data.time}</div></div></div>`;
+            item.innerHTML = `<div class='yourBlock'><div class="message" id=${data.id}>${data.message}<div class='time'>${data.date}, ${data.time}</div></div></div>`;
         }
     }
     else {
         if (data.filename) {
-            item.innerHTML = `<div class='block'><div class="message" id=${data.id}><div class="name">${data.name}:&nbsp</div>${data.message}<img class="upload__image" src='../uploads/${data.path.slice(7)}/${data.filename}.${data.type}'><div class='time'>${data.date}, ${data.time}</div></div></div>`;
+            if (data.type === 'jpg' || data.type ==='png' || data.type ==='jpeg') {
+                filetype = 'img'
+            }
+            else if (data.type === 'mp4' || data.type === 'avi' || data.type ==='mkv')
+            {
+                filetype = 'video'
+            }
+            item.innerHTML = `<div class='block'><div class="message" id=${data.id}><div class="name">${data.name}:&nbsp</div>${data.message}<${filetype} class="upload__image" src='../uploads/${data.path.slice(7)}/${data.filename}.${data.type}' controls><div class='time'>${data.date}, ${data.time}</div></div></div>`;
         }
         else {
             item.innerHTML = `<div class='block'><div class="message" id=${data.id}><div class="name">${data.name}:&nbsp</div>${data.message}<div class='time'>${data.date}, ${data.time}</div></div></div>`;

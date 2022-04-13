@@ -11,9 +11,6 @@ const socket = io(),
     fileLabel = document.querySelector('.file__label')
 
 let id = 0,
-    last = 0,
-    lastItem,
-    lastButton,
     inputSwitch = 0
 
 const Name = getCookie("name")
@@ -43,6 +40,7 @@ function getCookie(name) {
 form.addEventListener('submit', (event) => {
     event.preventDefault()
     if (input.value || file.value) {
+        console.log(file.files[0])
         const fulldate = new Date()
         const date = fulldate.toLocaleDateString()
         let hours = fulldate.getHours()
@@ -67,40 +65,39 @@ form.addEventListener('submit', (event) => {
 });
 
 socket.on('chat message', (data) => {
-    console.log(data)
     const item = document.createElement('li')
     if (login === data.login) {
         if (data.filename) {
-            item.innerHTML = `<div class="context"><button class="delete"><img class="trash" src="../images/trash.png"></button></div><div class='yourBlock'><div class="message" id=${data.id}><div class="yourName">Вы:&nbsp</div>${data.message}<img class="upload__image" src='../uploads/${data.path.slice(7)}/${data.filename}.${data.type}'><div class='time'>${data.date}, ${data.time}</div></div></div>`;
+            if (data.type === 'jpg' || data.type ==='png' || data.type ==='jpeg') {
+                filetype = 'img'
+            }
+            else if (data.type === 'mp4' || data.type === 'avi' || data.type ==='mkv')
+            {
+                filetype = 'video'
+            }
+            item.innerHTML = `<div class='yourBlock'><button class="delete"><img class="trash" src="../images/trash.png"></button><div class="message" id=${data.id}>${data.message}<${filetype} class="upload__image" src='../uploads/${data.path.slice(7)}/${data.filename}.${data.type}' controls><div class='time'>${data.date}, ${data.time}</div></div></div></div>`;
         }
         else {
-            item.innerHTML = `<div class="context"><button class="delete"><img class="trash" src="../images/trash.png"></button></div><div class='yourBlock'><div class="message" id=${data.id}><div class="yourName">Вы:&nbsp</div>${data.message}<div class='time'>${data.date}, ${data.time}</div></div></div>`;
+            item.innerHTML = `<div class='yourBlock'><button class="delete"><img class="trash" src="../images/trash.png"></button><div class="message" id=${data.id}>${data.message}<div class='time'>${data.date}, ${data.time}</div></div></div></div>`;
         }
         let deleteButton = item.querySelector('.delete')
-        let context = item.querySelector('.context')
         deleteButton.addEventListener('click', event => {
             socket.emit('deleteMessage', {'path': window.location.pathname, 'id': item.lastChild.lastChild.id})
-        })
-        context.addEventListener('contextmenu', event => {
-            event.preventDefault()
-            if (last > 0) lastItem.classList.remove('selected'), lastButton.style.display = 'none'
-            item.classList.add('selected')
-            deleteButton.style.display = 'block'
-            lastItem = item
-            lastButton = deleteButton
-            return lastItem, lastButton, last++
-        })
-        document.addEventListener('click', event => {
-            item.classList.remove('selected')
-            deleteButton.style.display = 'none'
         })
     }
     else {
         if (data.filename) {
-            item.innerHTML = `<div class="context"><div class='block'><div class="message" id=${data.id}><div class="name">${data.name}:&nbsp</div>${data.message}<img class="upload__image" src='../uploads/${data.path.slice(7)}/${data.filename}.${data.type}'><div class='time'>${data.date}, ${data.time}</div></div></div>`;
+            if (data.type === 'jpg' || data.type ==='png' || data.type ==='jpeg') {
+                filetype = 'img'
+            }
+            else if (data.type === 'mp4' || data.type === 'avi' || data.type ==='mkv')
+            {
+                filetype = 'video'
+            }
+            item.innerHTML = `<div class='block'><div class="name">${data.name}:&nbsp<div class="message" id=${data.id}>${data.message}<${filetype} class="upload__image" src='../uploads/${data.path.slice(7)}/${data.filename}.${data.type}' controls><div class='time'>${data.date}, ${data.time}</div></div></div></div>`;
         }
         else {
-            item.innerHTML = `<div class="context"><div class='block'><div class="message" id=${data.id}><div class="name">${data.name}:&nbsp</div>${data.message}<div class='time'>${data.date}, ${data.time}</div></div></div>`;
+            item.innerHTML = `<div class='block'><div class="name">${data.name}:&nbsp<div class="message" id=${data.id}>${data.message}<div class='time'>${data.date}, ${data.time}</div></div></div></div>`;
         }
     }
     messages.appendChild(item)
@@ -168,7 +165,7 @@ if (menuButton) {
 
 socket.on('deleteMessage', data => {
     let element = document.getElementById(data.id)
-    element.parentElement.style.display = 'none'
+    element.parentElement.parentElement.style.display = 'none'
 })
 
 
