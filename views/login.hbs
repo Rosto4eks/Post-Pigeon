@@ -13,17 +13,14 @@
 </head>
 <body>
 
-    <div class="header">
-        <div class="header__text">Starling</div>
-    </div>
     <img class="header__image" src="images/starling.png">
 
     <div class="container">
         <form class="login__form" action={{action}} method="post">
             <div class="errorMessage">{{errorMessage}}</div>
-            <input class="login__login" name='login' type="text" minlength="3" maxlength="18" autocomplete="off" placeholder="логин">
+            <input class="login__login" name='login' type="text" minlength="3" maxlength="18" autocomplete="on|off" placeholder="логин">
             {{#if name}}
-               <input class="login__name" name='name' type="text" minlength="3" maxlength="15" autocomplete="off" placeholder="имя">
+               <input class="login__name" name='name' type="text" minlength="3" maxlength="15" autocomplete="on|off" placeholder="имя">
             {{/if}}
             <input class="login__password" name='password' type="password" minlength="5" placeholder="пароль">
             {{#if repeat}}

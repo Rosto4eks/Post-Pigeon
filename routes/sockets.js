@@ -15,7 +15,7 @@ sockets = socket => {
                 MessagesData = JSON.parse(MessagesData)
                 for (elem in MessagesData) {
                     if (MessagesData[elem]["filename"]) {
-                        socket.emit('chat message', {login: MessagesData[elem]["login"], id: elem, name: MessagesData[elem]["name"], date: MessagesData[elem]["date"], time:MessagesData[elem]["time"] ,message: MessagesData[elem]["message"], path: data, filename: MessagesData[elem]["filename"], type: MessagesData[elem]["type"]});
+                        socket.emit('chat message', {login: MessagesData[elem]["login"], id: elem, name: MessagesData[elem]["name"], date: MessagesData[elem]["date"], time:MessagesData[elem]["time"] ,message: MessagesData[elem]["message"], path: data, filename: MessagesData[elem]["filename"], type: MessagesData[elem]["type"], size: MessagesData[elem]["size"]});
                     }
                     else {
                         socket.emit('chat message', {login: MessagesData[elem]["login"], id: elem, name: MessagesData[elem]["name"], date: MessagesData[elem]["date"], time:MessagesData[elem]["time"] ,message: MessagesData[elem]["message"]});
@@ -37,10 +37,10 @@ sockets = socket => {
         if (data.file) {
             let buff = Buffer.from(data.file)
             let filename = lightDB.path(28, 32)
-            MessagesData[id] = {"login": data.login, "name": data.name, "date": data.date, "time": data.time ,"message": data.message, filename: filename, type: data.type}
+            MessagesData[id] = {"login": data.login, "name": data.name, "date": data.date, "time": data.time ,"message": data.message, filename: filename, type: data.type, size: data.size}
             fs.writeFile(`./data${data.path}.json`, JSON.stringify(MessagesData, null, 2), callback)
             fs.writeFile(`./public/uploads/${(data.path).slice(7)}/${filename}.${data.type}`, buff, callback)
-            io.to(data.path).emit('chat message', {login: data.login, id: data.id, name: data.name, date: data.date, time: data.time ,message: data.message, path: data.path, filename: filename, type: data.type});
+            io.to(data.path).emit('chat message', {login: data.login, id: data.id, name: data.name, date: data.date, time: data.time ,message: data.message, path: data.path, filename: filename, type: data.type, size: data.size});
         }
         else {
             MessagesData[id] = {"login": data.login, "name": data.name, "date": data.date, "time": data.time ,"message": data.message}
@@ -53,6 +53,9 @@ sockets = socket => {
     socket.on('deleteMessage', data => {
         let MessagesData = require(`../data${data.path}.json`)
         // delete message
+        if (MessagesData[data.id]['filename']) {
+            fs.unlink(`./public/uploads/${data.path.slice(7)}/${MessagesData[data.id]["filename"]}.${MessagesData[data.id]["type"]}`, callback)
+        }
         delete MessagesData[data.id]
         fs.writeFile(`./data${data.path}.json`, JSON.stringify(MessagesData, null, 2), callback)
         io.to(data.path).emit('deleteMessage', {id: data.id})
@@ -64,7 +67,7 @@ sockets = socket => {
         delete chats[data.path.slice(7)]
         fs.writeFile(`./data/chats.json`, JSON.stringify(chats, null, 2), callback)
         fs.unlink(`./data${data.path}.json`, callback)
-        fs.rmSync(`.public/uploads/${data.path.slice(7)}`, { recursive: true, force: true })
+        fs.rmdir(`./public/uploads/${data.path.slice(7)}`, {recursive: true, force: true}, callback)
     })
 
     socket.on('typing', data => {

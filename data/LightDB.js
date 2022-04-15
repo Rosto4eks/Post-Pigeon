@@ -107,11 +107,10 @@ module.exports.path = (min, max) => {
     let newPass= ''
     const symbols = 'mw3HQWGikeFaxCrcLoDUzXdEKslMjBbq4NhfI1pgA8PYyZ67Ru0TtnO2JS5Vv9'
     for (let counter = 0; counter <= randomInteger(min, max); counter++) {
-        newPass += symbols[randomInteger(0, symbols.length)]
+        newPass += symbols[randomInteger(0, symbols.length-1)]
     }
     return newPass
 }
-
 
 module.exports.findChat = (name) => {
     for (let chat in chats) {
@@ -125,7 +124,7 @@ module.exports.saveChat = (uname, type, name, author, color) => {
     fs.copyFile('data/chats/exampleChat.json', `data/chats/${uname}.json`, callback)
     chats[uname] = {"href": `chats/${uname}`,"type": type, "name": name, "author": author, "color": color}
     fs.writeFile('data/chats.json', JSON.stringify(chats, null, 2), callback)
-    fs.mkdir(`uploads/${uname}`, callback)
+    fs.mkdir(`public/uploads/${uname}`, callback)
     return true
 }
 

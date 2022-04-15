@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #252525;
+    background-color:#1c4538;
     overflow-y: hidden;
 }
 ul {
@@ -22,7 +22,7 @@ li {
     font-family: 'Mulish', sans-serif;
     font-size: 25px;
     font-weight: 600;
-    border-bottom: 2px solid #1c1c1c;
+    border-bottom: 2px solid #ffffff1a;
     overflow: hidden;
 }
 li:hover {
