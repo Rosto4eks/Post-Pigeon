@@ -8,60 +8,28 @@ const socket = io(),
     change__button = document.querySelector('.change__button'),
     delete__button = document.querySelector('.delete__button'),
     file = document.querySelector('.file'),
-    fileLabel = document.querySelector('.file__label')
+    fileLabel = document.querySelector('.file__label'),
+    scroller = document.querySelector('.scroller'),
+    deleteButton = document.querySelector('.delete'),
+    point = document.querySelector('.point')
 
 let id = 0,
-    inputSwitch = 0
+    inputSwitch = 0,
+    lastItem,
+    usersTyping = [],
+    pointValue = 0
 
 const Name = getCookie("name")
 const login = getCookie("login")
+
+
+socket.emit('join', window.location.pathname)
+
 
 socket.on('redirect', (destination) => {
     window.location.href = destination;
 })
 
-input.addEventListener('input', event => {
-    if (input.value && inputSwitch === 0) {
-        socket.emit('typing', {href: window.location.pathname, typing: true, login: login})
-        inputSwitch = 1
-    }
-    if ((input.value).length < 1) {
-        inputSwitch = 0
-        socket.emit('typing', {href: window.location.pathname, typing: false})
-    }
-}) 
-
-socket.emit('join', window.location.pathname)
-function getCookie(name) {
-	var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"))
-	return matches ? decodeURIComponent(matches[1]) : undefined
-}
-
-form.addEventListener('submit', (event) => {
-    event.preventDefault()
-    if (input.value || file.value) {
-        const fulldate = new Date()
-        const date = fulldate.toLocaleDateString()
-        let hours = fulldate.getHours()
-        if (hours < 10) {hours = `0${hours}`}
-        let minutes = fulldate.getMinutes()
-        if (minutes < 10) {minutes = `0${minutes}`}
-        const time = hours + ':' + minutes
-        if (file.value) {
-            socket.emit('chat message', {path: window.location.pathname, login: login, id: id, name: Name, date: date, time: time, message: input.value, file: file.files[0], type: file.value.match(/\.([^.]+)$/)[1], size: file.files[0].size})
-        }
-        else {
-            socket.emit('chat message', {path: window.location.pathname, login: login, id: id, name: Name, date: date, time: time, message: input.value})
-        }
-       
-        input.value = ''
-        file.value = ''
-        fileLabel.style.transform = 'rotate(0deg)'
-        fileLabel.style.borderColor = '#212121'
-        inputSwitch = 0
-        socket.emit('typing', {href: window.location.pathname, typing: false})
-    };
-});
 
 socket.on('chat message', (data) => {
     const item = document.createElement('li')
@@ -89,7 +57,6 @@ socket.on('chat message', (data) => {
                     size = Math.round((data.size / 1048576), -2) + ' МB'
                 }
                 item.innerHTML = `<div class='yourBlock'>
-                                     <button class="delete"><img class="trash" src="../images/trash.png"></button>
                                      <div class="message" id=${data.id}>${data.message}</div>
                                      <a class="uploads__file" href='../uploads/${data.path.slice(7)}/${data.filename}.${data.type}' download>
                                          <img class="document" src="../images/document.png">
@@ -100,7 +67,6 @@ socket.on('chat message', (data) => {
             }
             else {
                 item.innerHTML = `<div class='yourBlock'>
-                                     <button class="delete"><img class="trash" src="../images/trash.png"></button>
                                      <div class="message" id=${data.id}>${data.message}</div>
                                      <${filetype} class="uploads" src='../uploads/${data.path.slice(7)}/${data.filename}.${data.type}' controls></${filetype}>
                                      <div class='time'>${data.date}, ${data.time}</div>
@@ -109,14 +75,14 @@ socket.on('chat message', (data) => {
         }
         else {
             item.innerHTML = `<div class='yourBlock'>
-                                <button class="delete"><img class="trash" src="../images/trash.png"></button>
                                  <div class="message" id=${data.id}>${data.message}</div>
                                  <div class='time'>${data.date}, ${data.time}</div>
                               </div>`
         }
-        let deleteButton = item.querySelector('.delete')
-        deleteButton.addEventListener('click', event => {
-            socket.emit('deleteMessage', {path: window.location.pathname, id: item.firstChild.childNodes[3].id})
+        item.addEventListener('dblclick', event => {
+            event.preventDefault()
+            return deleteButton.removeAttribute('disabled'), deleteButton.disable = false, deleteButton.style.opacity = 1, item.style.backgroundColor = '#16382d', lastItem = item
+  
         })
     }
     else {
@@ -170,11 +136,28 @@ socket.on('chat message', (data) => {
         }
     }
     messages.appendChild(item)
-    messages.scrollTo(0, messages.scrollHeight)
+    if (login == data.login) {
+        messages.scrollTo({
+            top: messages.scrollHeight,
+            behavior: "smooth"
+        }); 
+    }
+    else if (messages.scrollHeight <= 1500 || messages.scrollTop >= messages.scrollHeight - 1000) {
+        messages.scrollTo({
+            top: messages.scrollHeight,
+            behavior: "smooth"
+        });
+    }
+    else if (login != data.login && data.join != 'join') {
+        pointValue++
+        if (pointValue >= 1) {
+            point.style.display = 'block'
+            point.innerHTML = pointValue
+        }
+    }
     id = parseInt(data.id) + 1
 })
 
-let usersTyping = []
 socket.on('typing', data => {
     if (data.typing === true) {
         usersTyping.push(data.login)
@@ -208,9 +191,102 @@ socket.on('typing', data => {
     }
 })
 
+
+socket.on('deleteMessage', data => {
+    let element = document.getElementById(data.id)
+    element.parentElement.style.display = 'none'
+})
+
+
+document.addEventListener('click', event => {
+    if (lastItem) {
+        lastItem.style.backgroundColor = '#1c4538'
+        deleteButton.setAttribute('disabled', true)
+        deleteButton.disable = true
+        deleteButton.style.opacity = 0
+    }
+})
+
+
+input.addEventListener('input', event => {
+    if (input.value && inputSwitch === 0) {
+        socket.emit('typing', {href: window.location.pathname, typing: true, login: login})
+        inputSwitch = 1
+    }
+    if ((input.value).length < 1) {
+        inputSwitch = 0
+        socket.emit('typing', {href: window.location.pathname, typing: false})
+    }
+}) 
+
+
+form.addEventListener('submit', (event) => {
+    event.preventDefault()
+    if (input.value || file.value) {
+        const fulldate = new Date()
+        const date = fulldate.toLocaleDateString()
+        let hours = fulldate.getHours()
+        if (hours < 10) {hours = `0${hours}`}
+        let minutes = fulldate.getMinutes()
+        if (minutes < 10) {minutes = `0${minutes}`}
+        const time = hours + ':' + minutes
+        if (file.value) {
+            socket.emit('chat message', {path: window.location.pathname, login: login, id: id, name: Name, date: date, time: time, message: input.value, file: file.files[0], type: file.value.match(/\.([^.]+)$/)[1], size: file.files[0].size})
+        }
+        else {
+            socket.emit('chat message', {path: window.location.pathname, login: login, id: id, name: Name, date: date, time: time, message: input.value})
+        }
+       
+        input.value = ''
+        file.value = ''
+        fileLabel.style.transform = 'rotate(0deg)'
+        fileLabel.style.borderColor = '#212121'
+        inputSwitch = 0
+        socket.emit('typing', {href: window.location.pathname, typing: false})
+    };
+});
+
+
+file.addEventListener('input', event => {
+    fileLabel.style.transform = 'rotate(315deg)'
+    fileLabel.style.borderColor = '#216851'
+})
+
+
+messages.addEventListener('scroll', event => {
+    if (messages.scrollHeight <= 1500 || messages.scrollTop >= messages.scrollHeight - 1000) {
+        scroller.style.opacity = 0
+        scroller.setAttribute('disabled', true)
+        scroller.disable = true
+
+        point.style.display = 'none'
+        point.innerHTML = ''
+        pointValue = 0
+    }
+    else {
+        scroller.removeAttribute('disabled')
+        scroller.disable = false
+        scroller.style.opacity = 1
+    }
+    
+})
+
+
+scroller.addEventListener('click', event => {
+    messages.scrollTo({
+        top: messages.scrollHeight,
+        behavior: "smooth"
+    })
+})
+
+
+deleteButton.addEventListener('click', event => {
+    socket.emit('deleteMessage', {path: window.location.pathname, id: lastItem.firstChild.childNodes[1].id})
+})
+
+
 if (menuButton) {
     let menuSwitch = 0
-
     menuButton.addEventListener('click', event => {
         if (menuSwitch === 0) {
             menuSwitch = 1
@@ -231,14 +307,14 @@ if (menuButton) {
     })
 }
 
+function getCookie(name) {
+	var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"))
+	return matches ? decodeURIComponent(matches[1]) : undefined
+}
 
-socket.on('deleteMessage', data => {
-    let element = document.getElementById(data.id)
-    element.parentElement.style.display = 'none'
-})
-
-
-file.addEventListener('input', event => {
-    fileLabel.style.transform = 'rotate(315deg)'
-    fileLabel.style.borderColor = '#9deb9d'
-})
+setTimeout(() => {
+    messages.scrollTo({
+        top: messages.scrollHeight,
+        behavior: "smooth"
+    })    
+}, 500);

@@ -35,7 +35,7 @@ li {
     transform: rotate(180deg);
 }
 .chat__name {
-    margin: auto;
+    margin: auto 0 auto 30px;
 }
 .chat__name__text {
     margin: auto;
@@ -44,12 +44,13 @@ li {
     color:#fafafa;
     font-family: 'Mulish', sans-serif;
     font-weight: 600;
-    font-size: 25px;
+    font-size: 22px;
 }
 .menu__button {
     margin: auto 1% auto;
 }
 .menu {
+    z-index: 1;
     letter-spacing: 2px;
     transition: 400ms;
     transform: translateY(-30px);
@@ -118,9 +119,7 @@ li {
     margin: auto;
     width: 40px;
     height: 40px;
-    border: 3px dashed #212121;
-    border-right: none;
-    border-left: none;
+    border-bottom: 3px solid #212121;
     border-radius: 50%;
     cursor: pointer;
 }
@@ -184,11 +183,11 @@ input[type = file] {
     display: flex;
     flex-direction: column;
     margin: 10px;
-    padding: 10px;
+    padding: 5px;
     background-color: #212121;
     box-shadow: 0 15px 13px 0 #00000080;
     color: #e9e9e9;
-    border-radius: 25px 25px 25px 5px;
+    border-radius: 15px 15px 15px 2px;
 }
 .yourBlock {
     min-width: 150px;
@@ -196,11 +195,11 @@ input[type = file] {
     display: flex;
     flex-direction: column;
     margin: 10px 10px 10px auto;
-    padding: 10px;
+    padding: 5px;
     background-color: rgba(64, 121, 66, 0.588);
     box-shadow: 0 15px 13px 0 #00000080;
     color: #ffffff;
-    border-radius: 25px 25px 5px 25px;
+    border-radius: 15px 15px 2px 15px;
     transition: 400ms;
 }
 .selected {
@@ -214,21 +213,24 @@ input[type = file] {
     color: #599059;
 }
 .message {
-    color: white;
-    font-weight: 600;
+    margin-left: 5px;
+    color: #d2d2d2;
+    font-weight: 400;
     font-size: 16px;
     display: flex;
     flex-direction: column;
     word-break: break-word;
 }
 .time {
-    margin: 5px 0 auto 0;
+    margin: 2px 0 0 5px;
     color:#f7f7f7;
     font-size: 14px;
-    opacity: 0.7;
+    opacity: 0.5;
 }
 .delete {
-    cursor: pointer;
+    opacity: 0;
+    transition: 400ms;
+    background-color: #212121;
     margin: auto 10px auto auto;
     border: none;
     outline: none;
@@ -255,7 +257,7 @@ input[type = file] {
     transition: 200ms;
 }
 .uploads {
-    margin: 10px 0 10px 0;
+    margin: 2px 0 2px 0;
     border-radius: 15px;
     max-height: 500px;
     max-width: 600px;
@@ -263,14 +265,15 @@ input[type = file] {
 }
 .uploads__file {
     display: flex;
-    font-weight: 700;
+    font-weight: 600;
+    font-size: 15;
     color: #599059;
     padding: 5px 2px 5px 2px;
     text-decoration: none;
     text-align: center;
     background-color: #e2e2e2;
-    margin: 10px 0 10px 0;
-    border-radius: 15px;
+    margin: 5px 0 5px 0;
+    border-radius: 10px;
     max-height: 500px;
     max-width: 600px;
     width: 100%;
@@ -286,6 +289,39 @@ input[type = file] {
 }
 .upload_name {
     margin: auto;
+}
+.scroller {
+    border: none;
+    transition: 400ms;
+    opacity: 0;
+    background-color: #2a2a2a;
+    padding: 5px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    position: absolute;
+    bottom: 80px;
+    right: 10px;
+    border-radius: 50%;
+}
+.scroller__image {
+    width: 100%;
+}
+.point {
+    display: none;
+    color:#fafafa;
+    font-family: 'Mulish', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    text-align: center;
+    padding: 1px;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    bottom: 80px;
+    right: 10px;
+    border-radius: 50%;
+    background-color: #458cd2;
 }
 
 @media (max-width: 1000px) {

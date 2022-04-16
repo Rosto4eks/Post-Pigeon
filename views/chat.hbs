@@ -17,6 +17,7 @@
         <div class="header">
             <a href="/chats" class="back"></a>
             <div class="chat__name"><div class="chat__name__text">{{name}}</div></div>
+            <button class="delete"><img class="trash" src="../images/trash.png"></button>
             {{#if author}}
                 <a class="menu__button"><img class="menu__image" src="/images/menu.png"></img></a>
             {{/if}}
@@ -40,12 +41,15 @@
                        <input type="file" class="file" id="file">
                     </label>
                 </div>
-                <input type="text" class="input" autocomplete="off" placeholder="Сообщение">
+                <input type="text" class="input" autocomplete="new-password" placeholder="Сообщение">
                 <button class="button"></button>
             </form>
             {{/if}}
         </div>
     </div>
+
+    <button class="scroller"><img class="scroller__image" src="/images/scroller.png"></button>
+    <div class="point"></div>
 
     <div class="typing"></div>
 

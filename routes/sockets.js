@@ -14,11 +14,32 @@ sockets = socket => {
                 socket.join(data)
                 MessagesData = JSON.parse(MessagesData)
                 for (elem in MessagesData) {
-                    if (MessagesData[elem]["filename"]) {
-                        socket.emit('chat message', {login: MessagesData[elem]["login"], id: elem, name: MessagesData[elem]["name"], date: MessagesData[elem]["date"], time:MessagesData[elem]["time"] ,message: MessagesData[elem]["message"], path: data, filename: MessagesData[elem]["filename"], type: MessagesData[elem]["type"], size: MessagesData[elem]["size"]});
+                    let element = MessagesData[elem]
+                    if (element["filename"]) {
+                        socket.emit('chat message', {
+                            login: element["login"], 
+                            id: elem, 
+                            name: element["name"], 
+                            date: element["date"], 
+                            time: element["time"] ,
+                            message: element["message"], 
+                            path: data, 
+                            filename: element["filename"], 
+                            type: element["type"], 
+                            size: element["size"],
+                            join: 'join'
+                        });
                     }
                     else {
-                        socket.emit('chat message', {login: MessagesData[elem]["login"], id: elem, name: MessagesData[elem]["name"], date: MessagesData[elem]["date"], time:MessagesData[elem]["time"] ,message: MessagesData[elem]["message"]});
+                        socket.emit('chat message', {
+                            login: element["login"], 
+                            id: elem, 
+                            name: element["name"], 
+                            date: element["date"], 
+                            time: element["time"] ,
+                            message: element["message"],
+                            join: 'join'
+                        });
                     }
                 }
             }
@@ -37,15 +58,47 @@ sockets = socket => {
         if (data.file) {
             let buff = Buffer.from(data.file)
             let filename = lightDB.path(28, 32)
-            MessagesData[id] = {"login": data.login, "name": data.name, "date": data.date, "time": data.time ,"message": data.message, filename: filename, type: data.type, size: data.size}
+            MessagesData[id] = {
+                login: data.login, 
+                name: data.name, 
+                date: data.date, 
+                time: data.time ,
+                message: data.message, 
+                filename: filename, 
+                type: data.type, 
+                size: data.size
+            }
             fs.writeFile(`./data${data.path}.json`, JSON.stringify(MessagesData, null, 2), callback)
             fs.writeFile(`./public/uploads/${(data.path).slice(7)}/${filename}.${data.type}`, buff, callback)
-            io.to(data.path).emit('chat message', {login: data.login, id: data.id, name: data.name, date: data.date, time: data.time ,message: data.message, path: data.path, filename: filename, type: data.type, size: data.size});
+            io.to(data.path).emit('chat message', {
+                login: data.login, 
+                id: data.id, 
+                name: data.name, 
+                date: data.date, 
+                time: data.time, 
+                message: data.message, 
+                path: data.path, 
+                filename: filename, 
+                type: data.type, 
+                size: data.size
+            });
         }
         else {
-            MessagesData[id] = {"login": data.login, "name": data.name, "date": data.date, "time": data.time ,"message": data.message}
+            MessagesData[id] = {
+                login: data.login, 
+                name: data.name, 
+                date: data.date, 
+                time: data.time ,
+                message: data.message
+            }
             fs.writeFile(`./data${data.path}.json`, JSON.stringify(MessagesData, null, 2), callback)
-            io.to(data.path).emit('chat message', {login: data.login, id: data.id, name: data.name, date: data.date, time: data.time ,message: data.message});
+            io.to(data.path).emit('chat message', {
+                login: data.login, 
+                id: data.id, 
+                name: data.name, 
+                date: data.date, 
+                time: data.time, 
+                message: data.message});
         }
     })
 

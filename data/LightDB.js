@@ -15,6 +15,15 @@ class User {
         this.role = role
     };
 
+    find() {
+        for (let element in database[1]) {
+            if (this.login === element) {
+                return true
+            }
+        }   
+        return false  
+    }
+
     // user save function
     save() {
         // checking if the user exists in the database

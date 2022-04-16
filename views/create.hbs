@@ -18,13 +18,13 @@
 
     <form class="form" action="create" method="post">
         <div class="message">{{message}}</div>
-        <input class="name" name='name' type="text" minlength="3" maxlength="15"  placeholder="название" autocomplete="on|off">
+        <input class="name" name='name' type="text" minlength="3" maxlength="15"  placeholder="название" autocomplete="new-password">
         <div class="radios">
             <div class="r">
-                <input type="radio" id="radio1" name="radio" value="public" checked>
+                <input type="radio" id="radio1"  name="radio" value="public" checked>
                 <label for="radio1">открытый</label>
         
-                <input type="radio" id="radio2" name="radio" value="private">
+                <input type="radio" id="radio2"  name="radio" value="private">
                 <label for="radio2">закрытый</label>
 
             </div>
@@ -35,5 +35,6 @@
         </div>
         <input class="button" type="submit" value="создать"></input>
     </form>
+    <script src="/js/create.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 [
   {
-    "nextID": 9
+    "nextID": 10
   },
   {
     "Admin": {
@@ -55,6 +55,12 @@
       "id": 8,
       "name": "jane",
       "password": "bxc2FCgJVQ",
+      "role": "User"
+    },
+    "taeruss": {
+      "id": 9,
+      "name": "TaeRuss",
+      "password": "OxcacDTlBM",
       "role": "User"
     }
   }
