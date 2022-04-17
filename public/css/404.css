@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #272727;
+    background-color: #275a49;
 }
 .content {
     margin: 10% 10px 10px 10px;
@@ -16,7 +16,7 @@ body {
     font-family: 'Mulish', sans-serif;
     font-weight: 800;
     font-size: 45px;
-    color: #9deb9d;
+    color: #212121;
 }
 .button {
     width: 40%;
@@ -26,15 +26,17 @@ body {
     font-size: 25px;
     border: none;
     text-decoration: none;
-    border-radius: 20px;
+    border-radius: 15px;
     padding: 8px 5px 8px 5px;
-    background-color: #77d377;
-    color:#353535;
+    background-color: #212121;
+    color:#275a49;
     box-shadow: 0 5px 5px 0 #00000080;
+    transition: 400ms;
 }
-.button:active {
-    transition: 100ms;
-    background-color: #e2e2e2;
+.button:hover {
+    transition: 400ms;
+    transform: scale(1.05);
+    box-shadow: 0 5px 10px 0 #00000080;
 }
 
 @media (max-width: 800px) {

@@ -6,29 +6,29 @@ const router = express.Router()
 
 router.get('/', controller.chatRedirect)
 
-router.get('/about', controller.sendAboutPage)
+router.get('/about', controller.getAbout)
 
-router.get('/register', controller.sendRegisterPage)
+router.get('/register', controller.getRegister)
 
-router.post('/register', urlencodedParser, controller.registration)
+router.post('/register', urlencodedParser, controller.postRegister)
 
-router.get('/login', controller.sendLoginPage)
+router.get('/login', controller.getLogin)
 
-router.post('/login', urlencodedParser, controller.login)
+router.post('/login', urlencodedParser, controller.postLogin)
 
-router.get('/chats', controller.sendChatsPage)
+router.get('/chats', controller.getChats)
 
-router.post('/chats', jsonParser, controller.chats)
+router.post('/chats', jsonParser, controller.postChats)
 
-router.get('/chats/:chatName', controller.sendChatPage)
+router.get('/chats/:chatName', controller.getChat)
 
-router.get('/create', controller.sendCreatePage)
+router.get('/create', controller.getCreate)
 
-router.post('/create', urlencodedParser, controller.create)
+router.post('/create', urlencodedParser, controller.postCreate)
 
-router.get('/admin', controller.sendAdminPage)
+router.get('/admin', controller.getAdmin)
 
-router.post('/admin', jsonParser, controller.admin)
+router.post('/admin', jsonParser, controller.postAdmin)
 
 router.get('*', controller.error404)
 

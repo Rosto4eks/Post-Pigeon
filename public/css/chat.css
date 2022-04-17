@@ -196,7 +196,7 @@ input[type = file] {
     flex-direction: column;
     margin: 10px 10px 10px auto;
     padding: 5px;
-    background-color: rgba(64, 121, 66, 0.588);
+    background-color: #40794296;
     box-shadow: 0 15px 13px 0 #00000080;
     color: #ffffff;
     border-radius: 15px 15px 2px 15px;
@@ -217,9 +217,14 @@ input[type = file] {
     color: #d2d2d2;
     font-weight: 400;
     font-size: 16px;
-    display: flex;
-    flex-direction: column;
     word-break: break-word;
+}
+.href {
+    word-break:break-all;
+    font-style: italic;
+    padding: 0 5px 0 5px;
+    outline: 2px underline #d2d2d2;
+    color: #d2d2d2;
 }
 .time {
     margin: 2px 0 0 5px;

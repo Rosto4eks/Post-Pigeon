@@ -33,6 +33,9 @@ socket.on('redirect', (destination) => {
 
 socket.on('chat message', (data) => {
     const item = document.createElement('li')
+
+    data.message = UrlFinder(data.message)
+
     if (login === data.login) {
         if (data.filename) {
             if (data.type === 'jpg' || data.type ==='png' || data.type ==='jpeg') {
@@ -310,6 +313,37 @@ if (menuButton) {
 function getCookie(name) {
 	var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"))
 	return matches ? decodeURIComponent(matches[1]) : undefined
+}
+
+function UrlFinder(message)  {
+    let slovo = ''
+    let newMessage = ''
+    for (let q in message) {
+        if (message[q] === ' ') {
+            if (isURL(slovo) === true) {
+                slovo = `<a class="href" href="${slovo}">${slovo}</a>`
+            }
+            newMessage += slovo + ' '
+            slovo = ''
+        }
+        else {
+            slovo +=  message[q]
+        }
+    }
+    if (isURL(slovo) === true) {
+        slovo = `<a class="href" href="${slovo}">${slovo}</a>`
+    }
+    newMessage += slovo
+    return newMessage
+}
+
+function isURL(str) {
+    try {
+      new URL(str);
+      return true;
+    } catch {
+      return false;
+    }
 }
 
 setTimeout(() => {

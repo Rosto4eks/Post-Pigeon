@@ -3,20 +3,17 @@ let database = require('../data/database.json')
 let chats = require('../data/chats.json')
 const User = LightDB.User
 
-// GET /about
-exports.sendAboutPage = (req, res) => {
+exports.getAbout = (req, res) => {
     res.render('about', {
         count: LightDB.getCount
     })
 }
 
-// GET /register
-exports.sendRegisterPage = (req, res) => {
+exports.getRegister = (req, res) => {
     res.render('login', {
         pageName: 'Register',
         action: 'register',
-        name: true,
-        repeat: true,
+        register: true,
         buttonValue: 'зарегистрироваться',
         href1: '/about',
         href2: '/login',
@@ -25,8 +22,7 @@ exports.sendRegisterPage = (req, res) => {
     })
 }
 
-// POST register
-exports.registration = (req, res) => { // add new user to database
+exports.postRegister = (req, res) => { // add new user to database
     // check if all fields are filled
     if (req.body.login && req.body.name && req.body.password && req.body.repeat) {
         const newLogin = req.body.login
@@ -49,8 +45,7 @@ exports.registration = (req, res) => { // add new user to database
                     res.render('login', {
                         pagename: 'Register',
                         action: 'register',
-                        name: true,
-                        repeat: true,
+                        register: true,
                         errorMessage: 'ошибка регистрации',
                         buttonValue: 'зарегистрироваться',
                         href1: '/about',
@@ -65,8 +60,7 @@ exports.registration = (req, res) => { // add new user to database
                 res.render('login', {
                     pagename: 'Register',
                     action: 'register',
-                    name: true,
-                    repeat: true,
+                    register: true,
                     errorMessage: 'пароли не совпадают',
                     buttonValue: 'зарегистрироваться',
                     href1: '/about',
@@ -81,8 +75,7 @@ exports.registration = (req, res) => { // add new user to database
             res.render('login', {
                 pagename: 'Register',
                 action: 'register',
-                name: true,
-                repeat: true,
+                register: true,
                 errorMessage: 'этот логин занят',
                 buttonValue: 'зарегистрироваться',
                 href1: '/about',
@@ -97,8 +90,7 @@ exports.registration = (req, res) => { // add new user to database
         res.render('login', {
             pagename: 'Register',
             action: 'register',
-            name: true,
-            repeat: true,
+            register: true,
             errorMessage: 'не все поля заполнены',
             buttonValue: 'зарегистрироваться',
             href1: '/about',
@@ -109,8 +101,7 @@ exports.registration = (req, res) => { // add new user to database
     };
 };
 
-// GET /login
-exports.sendLoginPage = (req, res) => {
+exports.getLogin = (req, res) => {
     res.render('login', {
         pageName: 'login',
         action: 'login',
@@ -122,8 +113,7 @@ exports.sendLoginPage = (req, res) => {
     });
 };
 
-// POST /login
-exports.login = (req, res) => {
+exports.postLogin = (req, res) => {
     // check if all fields are filled
     if (req.body.login && req.body.password) {
         const newLogin = req.body.login
@@ -181,8 +171,7 @@ exports.login = (req, res) => {
     }
 }
 
-// GET /chats
-exports.sendChatsPage = (req, res) => {
+exports.getChats = (req, res) => {
     // checking for cookies
     if(req.cookies.login != null) {
          res.render('chats')
@@ -193,13 +182,11 @@ exports.sendChatsPage = (req, res) => {
     }
 }
 
-// POST //chats
-exports.chats = (req, res) => {
+exports.postChats = (req, res) => {
     res.json(chats)
 }
 
-// GET /chat/:chatName
-exports.sendChatPage = (req, res) => {
+exports.getChat = (req, res) => {
     // checking for cookies
     if (req.cookies.login != null) {
         // find chat in database
@@ -249,12 +236,10 @@ exports.sendChatPage = (req, res) => {
     }
 }
 
-// GET unregistered chat page
 exports.chatRedirect = (req, res) => {
     res.redirect('/chats')
 }
 
-// GET /login if user isn't logged in
 exports.loginRedirect = (req, res) => {
     // checking for cookies
     if(req.cookies.login != null) {
@@ -265,8 +250,7 @@ exports.loginRedirect = (req, res) => {
     }
 }
 
-// GET /create
-exports.sendCreatePage = (req, res) => {
+exports.getCreate = (req, res) => {
     // checking for cookies
     if(req.cookies.login != null) {
         res.render('create')
@@ -276,8 +260,7 @@ exports.sendCreatePage = (req, res) => {
     }
 }
 
-// POST /create
-exports.create = (req, res) => {
+exports.postCreate = (req, res) => {
     // check if all fields are filled
     if (req.body.name && req.body.radio && req.body.color) {
         const name = req.body.name
@@ -306,8 +289,7 @@ exports.create = (req, res) => {
     };
 }
 
-// GET /admin
-exports.sendAdminPage = (req, res) => {
+exports.getAdmin = (req, res) => {
     // cheking for cookies and user permissions
     if (req.cookies.login != null && database[1][req.cookies.login].role === 'Admin')
     {
@@ -318,12 +300,10 @@ exports.sendAdminPage = (req, res) => {
     }
 }
 
-// POST  /admin
-exports.admin = (req, res) => {
+exports.postAdmin = (req, res) => {
     res.json(database[1])
 }
 
-// GET unregistered page
 exports.error404 = (req, res) => {
     res.render('404')
 }

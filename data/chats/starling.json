@@ -49,5 +49,19 @@
     "message": "13 апреля - появилась возможность добавлять изображения и видео!",
     "filename": "aXMoQSejyRzEtPYHX81JChdOMzHQX3",
     "type": "png"
+  },
+  "8": {
+    "login": "Admin",
+    "name": "Rostislav",
+    "date": "17.04.2022",
+    "time": "13:53",
+    "message": "17 апреля - вышла версия 1.9.0, в которой была доработана отправка файлов любых типов, также был доработан дизайн"
+  },
+  "13": {
+    "login": "Admin",
+    "name": "Rostislav",
+    "date": "17.04.2022",
+    "time": "14:51",
+    "message": "Starling - проект с открытым исходным кодом, посмотреть его можете на сайте github https://github.com/Rosto4eks/Starling"
   }
 }

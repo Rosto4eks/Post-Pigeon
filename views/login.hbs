@@ -19,11 +19,11 @@
         <form class="login__form" action={{action}} method="post">
             <div class="errorMessage">{{errorMessage}}</div>
             <input class="login__login" name='login' type="text" minlength="3" maxlength="18" autocomplete="new-password" placeholder="логин">
-            {{#if name}}
+            {{#if register}}
                <input class="login__name" name='name' type="text" minlength="3" maxlength="15" autocomplete="new-password" placeholder="имя">
             {{/if}}
             <input class="login__password" name='password' type="password" minlength="5" autocomplete="new-password" placeholder="пароль">
-            {{#if repeat}}
+            {{#if register}}
             <input class="login__password" name='repeat' type="password" minlength="5" autocomplete="new-password" placeholder="повторите пароль">
             {{/if}}
             <input class="login__button" type="submit" value="{{buttonValue}}"></input>
