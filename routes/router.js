@@ -30,7 +30,7 @@ router.post('/profile', upload.single("file"), controller.postProfile)
 
 router.get('/create', controller.getCreate)
 
-router.post('/create', urlencodedParser, controller.postCreate)
+router.post('/create', urlencodedParser, upload.single("file"), controller.postCreate)
 
 router.get('/admin', controller.getAdmin)
 

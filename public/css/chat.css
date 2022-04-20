@@ -26,8 +26,9 @@ li {
     background-color: #212121;
 }
 .back {
-    margin-left: 1%;
+    margin-left: 10px;
     width: 40px;
+    min-width: 30px;
     background-image: url(../images/arrow.png);
     background-size:contain;
     background-repeat: no-repeat;
@@ -35,7 +36,16 @@ li {
     transform: rotate(180deg);
 }
 .chat__name {
-    margin: auto 0 auto 30px;
+    display: flex;
+}
+.chatAvatar {
+    justify-content: center;
+    margin: auto 10px auto 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    overflow: hidden;
 }
 .chat__name__text {
     margin: auto;
@@ -340,6 +350,9 @@ input[type = file] {
 }
 
 @media (max-width: 1000px) {
+    .chat__name__text {
+        font-size: 20px;
+    }
     .form {
         margin: 8px 10px 8px 10px;
     }

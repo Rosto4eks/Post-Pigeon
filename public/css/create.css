@@ -102,31 +102,17 @@ input {
     background-color: #275a49;
     transition: 400ms;
 }
-.colors {
-    display: flex;
-    margin-top: 20px;
-}
-.color__picker{
+.load__image {
     display: none;
 }
-.color {
-    box-shadow: 0 5px 5px 0 #00000080;
-    text-align: center;
-    width: 100%;
-    background-color: #2a2a2a;
-    border-radius: 15px;
-    margin-bottom: 10px;
+.load {
     padding: 10px 20px 10px 20px;
-    color: #aaaaaa;
-    font-family: 'Mulish', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-}
-.color:hover {
-    box-shadow: 0 5px 10px 0 #00000080;
-    background-color: #275a49;
     box-shadow: 0 5px 5px 0 #00000080;
-    transform: translateY(5px) scale(1.05);
+    color: #aaaaaa;
+    background-color: #2a2a2a;
+    margin-top: 20px;
+    border: 0;
+    border-radius: 15px;
     transition: 400ms;  
 }
 .button {
@@ -143,6 +129,16 @@ input {
     box-shadow: 0 5px 10px 0 #00000080;
     transform: translateY(5px) scale(1.05);
     transition: 400ms;
+}
+.avatar {
+    background-color: #2a2a2a;
+    justify-content: center;
+    overflow: hidden;
+    display: flex;
+    margin: 10px auto;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
 }
 
 @media (max-width: 800px) {

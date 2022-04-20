@@ -3,21 +3,18 @@
     "href": "/chats/starling",
     "type": "private",
     "name": "Starling новости",
-    "author": "admin",
-    "color": "#0af282"
+    "author": "admin"
   },
   "global": {
     "href": "/chats/global",
     "type": "public",
     "name": "Общий чат",
-    "author": "admin",
-    "color": "#a612c7"
+    "author": "admin"
   },
   "m9Xk7YO2MaxG390dh": {
     "href": "chats/m9Xk7YO2MaxG390dh",
     "type": "public",
     "name": "Best Images 🌆",
-    "author": "rosto4ek",
-    "color": "#5a9bad"
+    "author": "rosto4ek"
   }
 }

@@ -128,12 +128,16 @@ module.exports.findChat = (name) => {
     return false
 }
 
-module.exports.saveChat = (uname, type, name, author, color) => {
+module.exports.saveChat = (uname, type, name, author, file) => {
     //uname - unique name /type private/public
     fs.copyFile('data/chats/exampleChat.json', `data/chats/${uname}.json`, callback)
-    chats[uname] = {"href": `chats/${uname}`,"type": type, "name": name, "author": author, "color": color}
+    chats[uname] = {"href": `chats/${uname}`,"type": type, "name": name, "author": author}
     fs.writeFile('data/chats.json', JSON.stringify(chats, null, 2), callback)
     fs.mkdir(`public/uploads/${uname}`, callback)
+    fs.readFile(file.path, (error, data) => {
+        fs.writeFile(`public/chatAvatars/${uname}.jpg`, data, callback)
+        fs.rm(file.path, (error) => {if (error) console.log(error)})
+    })
     return true
 }
 

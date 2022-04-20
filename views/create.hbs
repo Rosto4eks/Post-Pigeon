@@ -16,7 +16,7 @@
         <a href="/chats" class="back">вернуться</a>
     </div>
 
-    <form class="form" action="create" method="post">
+    <form class="form" action="create" method="post" enctype="multipart/form-data">
         <div class="message">{{message}}</div>
         <input class="name" name='name' type="text" minlength="3" maxlength="15"  placeholder="название" autocomplete="new-password">
         <div class="radios">
@@ -29,10 +29,10 @@
 
             </div>
         </div>
-        <div class="colors">
-            <input class="color__picker" id="color" name="color" type="color" value="#a9d4a9">
-            <label class="color" for="color">выбрать цвет</label>
-        </div>
+        <label class="load">выберите фото
+            <input name="file" type="file" class="load__image" accept=".jpg, .jpeg, .png">
+        </label>
+        <div class="avatar"><img class="avatar__image" src="../images/starling.png"></div>
         <input class="button" type="submit" value="создать"></input>
     </form>
     <script src="/js/create.js"></script>

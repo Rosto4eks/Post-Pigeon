@@ -70,7 +70,6 @@ a {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: #212121;
     display: flex;
     overflow: hidden;
     transition: 400ms;
@@ -79,13 +78,17 @@ a {
     transform: scale(1.05) translateY(2px);
     transition: 400ms;
 }
-.circle {
+.chatAvatar {
+    background-color: #212121;
+    justify-content: center;
     margin: auto 0 auto 10px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    width: 15px;
-    min-width: 15px;
-    height: 15px;
+    display: flex;
+    overflow: hidden; 
 }
+
 .chat__name {
     font-size: 20px;
     color: #ececec;

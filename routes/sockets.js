@@ -121,6 +121,7 @@ sockets = socket => {
         delete chats[data.path.slice(7)]
         fs.writeFile(`./data/chats.json`, JSON.stringify(chats, null, 2), callback)
         fs.unlink(`./data${data.path}.json`, callback)
+        fs.unlink(`./public/chatAvatars/${data.path.slice(7)}.jpg`, callback)
         fs.rm(`./public/uploads/${data.path.slice(7)}`, {recursive: true, force: true}, callback)
     })
 

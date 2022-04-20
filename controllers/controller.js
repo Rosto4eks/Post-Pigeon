@@ -198,6 +198,7 @@ exports.getChat = (req, res) => {
             // check type of chat
             if(chats[req.params["chatName"]].type != "private" && req.cookies.login === chats[req.params["chatName"]].author) {
                 res.render('chat', {
+                    login: req.params["chatName"],
                     name: chats[req.params["chatName"]].name,
                     author: true,
                     public: true,
@@ -206,6 +207,7 @@ exports.getChat = (req, res) => {
             }
             else if(chats[req.params["chatName"]].type != "private") {
                 res.render('chat', {
+                    login: req.params["chatName"],
                     name: chats[req.params["chatName"]].name,
                     public: true,
                     js: "/js/publicChat.js"
@@ -214,6 +216,7 @@ exports.getChat = (req, res) => {
             // if chat is private and user is author
             else if (chats[req.params["chatName"]].type === "private" && req.cookies.login === chats[req.params["chatName"]].author) {
                 res.render('chat', {
+                    login: req.params["chatName"],
                     name: chats[req.params["chatName"]].name,
                     author: true,
                     public: true,
@@ -223,6 +226,7 @@ exports.getChat = (req, res) => {
             // if chat is private
             else if (chats[req.params["chatName"]].type === "private") {
                 res.render('chat', {
+                    login: req.params["chatName"],
                     name: chats[req.params["chatName"]].name,
                     js: "/js/privateChat.js"
                 })
@@ -297,15 +301,15 @@ exports.getCreate = (req, res) => {
 
 exports.postCreate = (req, res) => {
     // check if all fields are filled
-    if (req.body.name && req.body.radio && req.body.color) {
+    if (req.body.name && req.body.radio && req.file) {
         const name = req.body.name
         const radio = req.body.radio
-        const color = req.body.color
         const path = LightDB.path(12, 20)
+        const file = req.file
 
         // if chat with this login doesn't exist
         if (LightDB.findChat(path) === false) {
-            if (LightDB.saveChat(path, radio, name, req.cookies.login, color) === true) {
+            if (LightDB.saveChat(path, radio, name, req.cookies.login, file) === true) {
                 res.redirect(`/chats/${path}`)
             }
         }
