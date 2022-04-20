@@ -44,3 +44,7 @@ body {
         width: 60%;
     }
 }
+
+::selection {
+    background: #1c4538; 
+}

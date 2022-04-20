@@ -20,6 +20,9 @@ socket.on('redirect', (destination) => {
 
 socket.on('chat message', (data) => {
     const item = document.createElement('li')
+
+    data.message = UrlFinder(data.message)
+
     if (data.filename) {
         if (data.type === 'jpg' || data.type ==='png' || data.type ==='jpeg') {
             filetype = 'img'
@@ -43,7 +46,6 @@ socket.on('chat message', (data) => {
                 size = Math.round((data.size / 1048576), -2) + ' МB'
             }
             item.innerHTML = `<div class='block'>
-                                    <div class="name">${data.name}:&nbsp</div>
                                     <div class="message" id=${data.id}>${data.message}</div>
                                     <a class="uploads__file" href='../uploads/${data.path.slice(7)}/${data.filename}.${data.type}' download>
                                         <img class="document" src="../images/document.png">
@@ -54,7 +56,6 @@ socket.on('chat message', (data) => {
         }
         else {
             item.innerHTML = `<div class='block'>
-                                    <div class="name">${data.name}:&nbsp</div>
                                     <div class="message" id=${data.id}>${data.message}</div>
                                     <${filetype} class="uploads" src='../uploads/${data.path.slice(7)}/${data.filename}.${data.type}' controls></${filetype}>
                                     <div class='time'>${data.date}, ${data.time}</div>
@@ -63,17 +64,13 @@ socket.on('chat message', (data) => {
     }
     else {
         item.innerHTML = `<div class='block'>
-                            <div class="name">${data.name}:&nbsp</div>
                             <div class="message" id=${data.id}>${data.message}</div>
                             <div class='time'>${data.date}, ${data.time}</div>
                           </div>`
     }
     messages.appendChild(item)
     if (messages.scrollHeight <= 1500 || messages.scrollTop >= messages.scrollHeight - 1000) {
-        messages.scrollTo({
-            top: messages.scrollHeight,
-            behavior: "smooth"
-        });
+        scroll(100)
     }
     else if (data.join != 'join') {
         pointValue++
@@ -81,12 +78,6 @@ socket.on('chat message', (data) => {
             point.style.display = 'block'
             point.innerHTML = pointValue
         }
-    }
-    if (data.join === 'join') {
-        messages.scrollTo({
-            top: messages.scrollHeight,
-            behavior: "smooth"
-        }); 
     }
     id = parseInt(data.id) + 1
 })
@@ -123,8 +114,47 @@ scroller.addEventListener('click', event => {
     })
 })
 
+function UrlFinder(message)  {
+    let slovo = ''
+    let newMessage = ''
+    for (let q in message) {
+        if (message[q] === ' ') {
+            if (isURL(slovo) === true) {
+                slovo = `<a class="href" href="${slovo}">${slovo}</a>`
+            }
+            newMessage += slovo + ' '
+            slovo = ''
+        }
+        else {
+            slovo +=  message[q]
+        }
+    }
+    if (isURL(slovo) === true) {
+        slovo = `<a class="href" href="${slovo}">${slovo}</a>`
+    }
+    newMessage += slovo
+    return newMessage
+}
+
+function isURL(str) {
+    try {
+      new URL(str);
+      return true;
+    } catch {
+      return false;
+    }
+}
 
 function getCookie(name) {
 	var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"))
 	return matches ? decodeURIComponent(matches[1]) : undefined
 }
+
+function scroll(time) {setTimeout(() => {
+    messages.scrollTo({
+        top: messages.scrollHeight,
+        behavior: "smooth"
+    })    
+}, time)
+}
+scroll(500)

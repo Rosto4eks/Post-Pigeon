@@ -272,7 +272,7 @@ input[type = file] {
     display: flex;
     font-weight: 600;
     font-size: 15;
-    color: #599059;
+    color: #216851;
     padding: 5px 2px 5px 2px;
     text-decoration: none;
     text-align: center;
@@ -328,6 +328,16 @@ input[type = file] {
     border-radius: 50%;
     background-color: #458cd2;
 }
+.avatar {
+    justify-content: center;
+    margin: auto 0 2px 0;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #212121;
+    display: flex;
+    overflow: hidden;
+}
 
 @media (max-width: 1000px) {
     .form {
@@ -339,10 +349,17 @@ input[type = file] {
     .footer {
         border-radius: 0;
     }
+    .avatar {
+        width: 35px;
+        height: 35px;
+    }
 }
 
 ::-webkit-scrollbar {
     width: 0px; 
+}
+::selection {
+    background: #1c4538; 
 }
 
 @keyframes show {

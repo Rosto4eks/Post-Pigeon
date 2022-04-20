@@ -1,6 +1,5 @@
 const chatList = document.querySelector('.chatlist')
 let request = new XMLHttpRequest()
-const logout = document.querySelector('.logout')
 request.open('POST', '/chats', true);
 request.setRequestHeader("Content-Type", "application/json");
 request.send()
@@ -13,6 +12,3 @@ request.addEventListener("load", function () {
      }
 });
 
-logout.addEventListener('click', (e) => {
-   document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
-})

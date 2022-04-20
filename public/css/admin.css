@@ -29,3 +29,6 @@ td {
 ::-webkit-scrollbar {
     width: 0px; 
 }
+::selection {
+    background: #1c4538; 
+}

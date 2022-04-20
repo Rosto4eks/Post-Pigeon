@@ -6,7 +6,6 @@ const express = require('express'),
     io = require('socket.io')(http, { maxHttpBufferSize: 1e8}),
     expressHbs = require('express-handlebars'),
     hbs = require('hbs')
-    
 
 module.exports = io
 const sockets = require('./routes/sockets')
@@ -21,5 +20,5 @@ io.on('connection', sockets)
 const PORT = 1337;
 
 http.listen(PORT, () => {
-    console.log(`\nlocal adress:   localhost:${PORT}\nnetwork adress: 192.168.100.6:${PORT}`);
+    console.log(`\nlocal adress:   localhost:${PORT}\nnetwork adress: 192.168.100.4:${PORT}`);
 })

@@ -81,14 +81,14 @@ sockets = socket => {
                 filename: filename, 
                 type: data.type, 
                 size: data.size
-            });
-        }
+                });
+            }
         else {
             MessagesData[id] = {
                 login: data.login, 
                 name: data.name, 
                 date: data.date, 
-                time: data.time ,
+                time: data.time,
                 message: data.message
             }
             fs.writeFile(`./data${data.path}.json`, JSON.stringify(MessagesData, null, 2), callback)
@@ -98,7 +98,8 @@ sockets = socket => {
                 name: data.name, 
                 date: data.date, 
                 time: data.time, 
-                message: data.message});
+                message: data.message
+            })
         }
     })
 
@@ -120,7 +121,7 @@ sockets = socket => {
         delete chats[data.path.slice(7)]
         fs.writeFile(`./data/chats.json`, JSON.stringify(chats, null, 2), callback)
         fs.unlink(`./data${data.path}.json`, callback)
-        fs.rmdir(`./public/uploads/${data.path.slice(7)}`, {recursive: true, force: true}, callback)
+        fs.rm(`./public/uploads/${data.path.slice(7)}`, {recursive: true, force: true}, callback)
     })
 
     socket.on('typing', data => {

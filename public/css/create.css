@@ -150,3 +150,7 @@ input {
         width: 80%;
     }
 }
+
+::selection {
+    background: #1c4538; 
+}

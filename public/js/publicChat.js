@@ -38,7 +38,7 @@ socket.on('chat message', (data) => {
 
     if (login === data.login) {
         if (data.filename) {
-            if (data.type === 'jpg' || data.type ==='png' || data.type ==='jpeg') {
+            if (data.type === 'jpg' || data.type === 'jpeg' || data.type ==='png' || data.type ==='jpeg') {
                 filetype = 'img'
             }
             else if (data.type === 'mp4' || data.type === 'avi' || data.type ==='mkv')
@@ -83,14 +83,13 @@ socket.on('chat message', (data) => {
                               </div>`
         }
         item.addEventListener('dblclick', event => {
-            event.preventDefault()
             return deleteButton.removeAttribute('disabled'), deleteButton.disable = false, deleteButton.style.opacity = 1, item.style.backgroundColor = '#16382d', lastItem = item
   
         })
     }
     else {
         if (data.filename) {
-            if (data.type === 'jpg' || data.type ==='png' || data.type ==='jpeg') {
+            if (data.type === 'jpg' || data.type === 'jpeg' || data.type ==='png' || data.type ==='jpeg') {
                 filetype = 'img'
             }
             else if (data.type === 'mp4' || data.type === 'avi' || data.type ==='mkv')
@@ -111,8 +110,8 @@ socket.on('chat message', (data) => {
                 if (data.size > 1048576) {
                     size = Math.round((data.size / 1048576), -2) + ' МB'
                 }
-                item.innerHTML = `<div class='block'>
-                                     <div class="name">${data.name}:&nbsp</div>
+                item.innerHTML = `<a href=/profile/${data.login} class="avatar"><img class="avatar__image" src="../avatars/${data.login}.jpg"></a>
+                                  <div class='block'>
                                      <div class="message" id=${data.id}>${data.message}</div>
                                      <a class="uploads__file" href='../uploads/${data.path.slice(7)}/${data.filename}.${data.type}' download>
                                          <img class="document" src="../images/document.png">
@@ -122,8 +121,8 @@ socket.on('chat message', (data) => {
                                   </div>`
             }
             else {
-                item.innerHTML = `<div class='block'>
-                                     <div class="name">${data.name}:&nbsp</div>
+                item.innerHTML = `<a href=/profile/${data.login} class="avatar"><img class="avatar__image" src="../avatars/${data.login}.jpg"></a>
+                                  <div class='block'>
                                      <div class="message" id=${data.id}>${data.message}</div>
                                      <${filetype} class="uploads" src='../uploads/${data.path.slice(7)}/${data.filename}.${data.type}' controls></${filetype}>
                                      <div class='time'>${data.date}, ${data.time}</div>
@@ -131,8 +130,8 @@ socket.on('chat message', (data) => {
             }
         }
         else {
-            item.innerHTML = `<div class='block'>
-                                 <div class="name">${data.name}:&nbsp</div>
+            item.innerHTML = `<a href=/profile/${data.login} class="avatar"><img class="avatar__image" src="../avatars/${data.login}.jpg"></a>
+                              <div class='block'>
                                  <div class="message" id=${data.id}>${data.message}</div>
                                  <div class='time'>${data.date}, ${data.time}</div>
                               </div>`
@@ -140,16 +139,10 @@ socket.on('chat message', (data) => {
     }
     messages.appendChild(item)
     if (login == data.login) {
-        messages.scrollTo({
-            top: messages.scrollHeight,
-            behavior: "smooth"
-        }); 
+        scroll(100)
     }
     else if (messages.scrollHeight <= 1500 || messages.scrollTop >= messages.scrollHeight - 1000) {
-        messages.scrollTo({
-            top: messages.scrollHeight,
-            behavior: "smooth"
-        });
+        scroll(100)
     }
     else if (login != data.login && data.join != 'join') {
         pointValue++
@@ -197,7 +190,7 @@ socket.on('typing', data => {
 
 socket.on('deleteMessage', data => {
     let element = document.getElementById(data.id)
-    element.parentElement.style.display = 'none'
+    element.parentElement.parentElement.style.display = 'none'
 })
 
 
@@ -346,9 +339,11 @@ function isURL(str) {
     }
 }
 
-setTimeout(() => {
+function scroll(time) {setTimeout(() => {
     messages.scrollTo({
         top: messages.scrollHeight,
         behavior: "smooth"
     })    
-}, 500);
+}, time)
+}
+scroll(500)

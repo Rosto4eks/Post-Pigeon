@@ -1,8 +1,10 @@
-const express = require('express')
-const jsonParser = express.json()
-const urlencodedParser = express.urlencoded({extended: false})
-const controller = require('../controllers/controller')
-const router = express.Router()
+const express = require('express'),
+      urlencodedParser = express.urlencoded({extended: false}),
+      controller = require('../controllers/controller'),
+      router = express.Router(),
+      multer = require('multer'),
+      upload = multer({dest:"public/avatars"})
+
 
 router.get('/', controller.chatRedirect)
 
@@ -18,9 +20,13 @@ router.post('/login', urlencodedParser, controller.postLogin)
 
 router.get('/chats', controller.getChats)
 
-router.post('/chats', jsonParser, controller.postChats)
+router.post('/chats', urlencodedParser, controller.postChats)
 
 router.get('/chats/:chatName', controller.getChat)
+
+router.get('/profile/:login', controller.getProfile)
+
+router.post('/profile', upload.single("file"), controller.postProfile)
 
 router.get('/create', controller.getCreate)
 
@@ -28,7 +34,7 @@ router.post('/create', urlencodedParser, controller.postCreate)
 
 router.get('/admin', controller.getAdmin)
 
-router.post('/admin', jsonParser, controller.postAdmin)
+router.post('/admin', urlencodedParser, controller.postAdmin)
 
 router.get('*', controller.error404)
 

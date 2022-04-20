@@ -1,39 +1,39 @@
 [
   {
-    "nextID": 10
+    "nextID": 12
   },
   {
-    "Admin": {
+    "admin": {
       "id": 0,
       "name": "Rostislav",
       "password": "CEl3ka2p8SHG",
       "role": "Admin"
     },
-    "Rosto4ek": {
+    "rosto4ek": {
       "id": 1,
       "name": "Rosto4eks",
       "password": "N3WacDOZRgJVQ",
       "role": "User"
     },
-    "Rostislav": {
+    "rostislav": {
       "id": 2,
       "name": "Рикардо",
       "password": "N3WacDOZRgJVQ",
       "role": "User"
     },
-    "Arianna": {
+    "arianna": {
       "id": 3,
       "name": "Арианна",
       "password": "CcDexc2OSCp8SHG",
       "role": "User"
     },
-    "WillSmith": {
+    "willsmith": {
       "id": 4,
       "name": "Уилл Смит",
       "password": "HkajMbMwQenJI",
       "role": "User"
     },
-    "JohnyDepp": {
+    "johnydepp": {
       "id": 5,
       "name": "Джонни Депп",
       "password": "bDXIOS6ElagPA",
@@ -61,6 +61,12 @@
       "id": 9,
       "name": "TaeRuss",
       "password": "OxcacDTlBM",
+      "role": "User"
+    },
+    "cocojambo": {
+      "id": 11,
+      "name": "coco",
+      "password": "oDXoDXbxc3qhUp8SHG",
       "role": "User"
     }
   }

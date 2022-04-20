@@ -45,10 +45,9 @@ a {
     height: 60px;
     background-color: #1c1c1c;
 }
-.logo {
-    height: 40px;
-}
 .about {
+    width: 40px;
+    height: 40px;
     margin: auto auto auto 30px;
     transition: 400ms;
 }
@@ -65,12 +64,18 @@ a {
     transform: scale(1.05) translateY(2px);
     transition: 400ms;
 }
-.logout {
-    color: #ececec;
+.avatar {
+    justify-content: center;
     margin: auto 30px auto auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #212121;
+    display: flex;
+    overflow: hidden;
     transition: 400ms;
 }
-.logout:hover {
+.avatar:hover {
     transform: scale(1.05) translateY(2px);
     transition: 400ms;
 }
@@ -91,10 +96,21 @@ a {
 ::-webkit-scrollbar {
     width: 0px; 
 }
+::selection {
+    background: #1c4538; 
+}
 
 @media (max-width: 800px) {
     .header {
         font-size: 20px;
+    }
+    .about {
+        height: 35px;
+        width: 35px;
+        margin: auto auto auto 10px;
+    }
+    .avatar {
+        margin: auto 10px auto auto;
     }
 }
 

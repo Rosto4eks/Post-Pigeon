@@ -2,6 +2,7 @@ const LightDB = require('../data/LightDB')
 let database = require('../data/database.json')
 let chats = require('../data/chats.json')
 const User = LightDB.User
+const fs = require('fs')
 
 exports.getAbout = (req, res) => {
     res.render('about', {
@@ -25,7 +26,7 @@ exports.getRegister = (req, res) => {
 exports.postRegister = (req, res) => { // add new user to database
     // check if all fields are filled
     if (req.body.login && req.body.name && req.body.password && req.body.repeat) {
-        const newLogin = req.body.login
+        const newLogin = req.body.login.toLowerCase()
         const newName = req.body.name
         const newPassword = req.body.password
         // user presence check
@@ -116,7 +117,7 @@ exports.getLogin = (req, res) => {
 exports.postLogin = (req, res) => {
     // check if all fields are filled
     if (req.body.login && req.body.password) {
-        const newLogin = req.body.login
+        const newLogin = req.body.login.toLowerCase()
         const newPassword = req.body.password
         // user presence check
         // if the user doesn't exist
@@ -174,7 +175,9 @@ exports.postLogin = (req, res) => {
 exports.getChats = (req, res) => {
     // checking for cookies
     if(req.cookies.login != null) {
-         res.render('chats')
+         res.render('chats', {
+             login: req.cookies["login"]
+         })
     }
     // if cookies don't exist
     else {
@@ -248,6 +251,38 @@ exports.loginRedirect = (req, res) => {
     else {
         res.redirect('/login')
     }
+}
+
+exports.getProfile = (req, res) => {
+    if(LightDB.findUser(req.params["login"]) === true) {
+        if (req.cookies.login === req.params["login"]) {
+            res.render('profile', {
+                login: req.params["login"],
+                action: '/profile/' + req.params["login"],
+                imageSrc: `/avatars/${req.cookies.login}.jpg`,
+                name: LightDB.getName(req.params["login"]),
+                author: true
+            })
+        }
+        else {
+            res.render('profile', {
+                guest: true,
+                imageSrc: `/avatars/${req.params["login"]}.jpg`,
+                name: LightDB.getName(req.params["login"]),
+            })
+        }
+    }
+    else {
+        res.render('chats')
+    }
+}
+
+exports.postProfile = (req, res) => {
+    fs.readFile(req.file.path, (error, data) => {
+        fs.writeFile(`public/avatars/${req.body.login}.jpg`, data, (error) => {if (error) console.log(error)})
+        fs.rm(req.file.path, (error) => {if (error) console.log(error)})
+    })
+    res.redirect(req.get('referer'))
 }
 
 exports.getCreate = (req, res) => {

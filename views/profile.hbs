@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/profile.css">
+    <title>starling</title>
+</head>
+<body>
+
+    <div class="header">
+        <a href="/chats" class="back">назад</a>
+    </div>
+
+    <div class="container">
+        {{#if author}}
+            <div class="profile__image">
+                <form class="image__form" method="post" action="/profile" enctype="multipart/form-data">
+                    <input name="login" value={{login}} hidden></input>
+                    <label class="load">
+                        <input name="file" type="file" class="load__image" accept=".jpg, .jpeg, .png">
+                    </label>
+                </form>
+                <img class="image" src={{imageSrc}}>
+            </div>
+        {{/if}}
+        {{#if guest}}
+        <div class="profile__image">
+                <img class="image" src={{imageSrc}}>
+            </div>
+        {{/if}}
+        <div class="name">{{name}}</div>
+        {{#if author}}
+            <a href="/login" class="logout">выйти</a>
+        {{/if}}
+    </div>
+
+    {{#if author}}
+        <script src="/js/profile.js"></script>
+    {{/if}}
+
+</body>
+</html>

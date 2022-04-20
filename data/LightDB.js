@@ -28,7 +28,6 @@ class User {
     save() {
         // checking if the user exists in the database
         if (this.find() === true) {
-            console.log('user already exist')
             return false
         }
         // if the user exists, add him to the database
@@ -37,6 +36,7 @@ class User {
             database[1][this.login] = {"id": this.id,"name": this.name, "password": hash(this.password), "role": this.role}
             database[0]["nextID"]++
             fs.writeFile('data/database.json', JSON.stringify(database, null, 2), callback)
+            fs.copyFile('public/images/starling.png', `public/avatars/${this.login}.jpg`, callback)
             return true
         }
     }
