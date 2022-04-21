@@ -94,58 +94,18 @@ li {
     height: 600px;
     margin: 30px auto 30px;
 }
-.blog {
-    opacity: 0;
-    animation-name: enter;
-    animation-duration: 1.5s;
-    animation-delay: 0.2s;
-    animation-fill-mode: forwards;
-    display: flex;
-    font-family: 'Mulish', sans-serif;
-    font-size: 40px;
-    font-weight: 800;
-    width: 100%;
-}
-.avatar {
-    display: flex;
-    margin-top: 50px;
-    margin-left: 15%;
-    width: 50px;
-    height: 50px;
-    text-align: center;
-    background-color: blueviolet;
-    color: #f4f4f4;
-    border-radius: 50%;
-}
-.avatar__image {
-    margin: auto;
-    width: 60%;
-    height: 60%;
-}
-.blog__text {
-    margin: 50px auto 50px 10px;
-    padding-left: 100px;
-    padding-right: 100px;
-    border-radius: 5px 80px 80px 80px;
-    background-color: #fafafa;
-}
-.b-1 {
-    color: #2e2e2e;
-    margin-top: 50px;
-    margin-left: -50px;
-}
-.b-2 {
-    color: #272727;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    margin-left: 50px;
-}
+
 .redirect {
-    background: #212121;
     display: flex;
-    width: 100%;
+    flex-direction: column;
+    width: 60%;
+    margin: 0 auto;
 }
 .login {
+    text-align: center;
+    width: 100%;
+    padding: 10px 0 10px 0;
+    background-color: #1d1d1d;
     text-decoration: none;
     font-family: 'Mulish', sans-serif;
     font-size: 35px;
@@ -161,6 +121,10 @@ li {
     transition: 400ms;
 }
 .register {
+    text-align: center;
+    width: 100%;
+    padding: 10px 0 10px 0;
+    background-color: #1d1d1d;
     text-decoration: none;
     font-family: 'Mulish', sans-serif;
     font-size: 35px;
@@ -182,6 +146,7 @@ li {
     font-family: 'Mulish', sans-serif;
     font-size: 32px;
     letter-spacing: 3px;
+    line-height: 10px;
     font-weight: 800;
     text-align: center;
 }
@@ -248,46 +213,21 @@ li {
     .count__text {
         font-size: 32px;
     }
-    .blog {
-        font-size: 32px;
-    }
-    .blog__text {
-        padding-left: 40px;
-        padding-right: 30px;
-    }
-    .b-1 {
-        margin-left: -30px;
-    }
-    .b-2 {
-        margin-left: 30px;
-    }
     .redirect {
+        width: 80%;
         flex-direction: column;
     }
 }
 
 @media (max-width: 550px) {
     .about {
-        font-size: 28px;
+        font-size: 25px;
         letter-spacing: 1px;
     }
     .count__text {
         font-size: 28px;
     }
-    .blog {
-        text-align: center;
-        font-size: 23px;
-    }
-    .blog__text {
-        padding-left: 5px;
-        padding-right: 5px;
-    }
-    .b-1 {
-        margin-left: 0;
-    }
-    .b-2 {
-        margin-left: 0;
-    }
+
     .login {
         font-size: 35px;
     }

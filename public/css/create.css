@@ -71,12 +71,14 @@ input {
     transition: 400ms;
 }
 .radios {
-    display: flex;
     margin: 20px auto 10px auto;
     font-family: 'Mulish', sans-serif;
     font-size: 18px;
     font-weight: 700;
     color: #aaaaaa;
+}
+.r {
+    display: flex;
 }
 .r input[type="radio"] {
     display: none;
@@ -144,6 +146,12 @@ input {
 @media (max-width: 800px) {
     form {
         width: 80%;
+    }
+    .r {
+        flex-direction: column;
+    }
+    .r label {
+        margin-top: 10px;
     }
 }
 
