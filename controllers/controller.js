@@ -5,9 +5,7 @@ const User = LightDB.User
 const fs = require('fs')
 
 exports.getAbout = (req, res) => {
-    res.render('about', {
-        count: LightDB.getCount
-    })
+    res.render('about')
 }
 
 exports.getRegister = (req, res) => {
