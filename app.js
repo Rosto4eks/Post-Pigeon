@@ -17,7 +17,7 @@ server.use('/', router)
 
 io.on('connection', sockets)
 
-const PORT = 1337;
+const PORT = 8000;
 
 http.listen(PORT, () => {
     console.log(`\nlocal adress:   localhost:${PORT}\nnetwork adress: 192.168.100.4:${PORT}`);

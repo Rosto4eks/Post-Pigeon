@@ -1,6 +1,6 @@
 [
   {
-    "nextID": 12
+    "nextID": 16
   },
   {
     "admin": {
@@ -67,6 +67,30 @@
       "id": 11,
       "name": "coco",
       "password": "oDXoDXbxc3qhUp8SHG",
+      "role": "User"
+    },
+    "jora123": {
+      "id": 12,
+      "name": "Жора",
+      "password": "bDXLxcgJVQ",
+      "role": "User"
+    },
+    "akdn": {
+      "id": 13,
+      "name": "Okeyoj",
+      "password": "tTOtp8SHG",
+      "role": "User"
+    },
+    "семерей": {
+      "id": 14,
+      "name": "Станислав",
+      "password": "gJVQNIv",
+      "role": "User"
+    },
+    "abobik": {
+      "id": 15,
+      "name": "Abobik",
+      "password": "CqhUqheexgJVQ",
       "role": "User"
     }
   }
